@@ -9,11 +9,9 @@ module.exports = {
         clean: true,
     },
 
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: "ToDo App",
-        })
-    ],
+    plugins: [new HtmlWebpackPlugin({
+        template: './src/template.html'
+    })],
 
     module: {
         rules: [
