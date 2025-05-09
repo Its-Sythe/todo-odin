@@ -17,4 +17,4 @@ const defaultTask = taskCreator(
 
 defaultProject.allTasks.push(defaultTask);
 
-console.log(defaultProject)
+console.log(defaultTask);

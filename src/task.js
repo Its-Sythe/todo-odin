@@ -5,33 +5,13 @@ const handleTasks = (function() {
         }
     }
 
-    function changeDesc(task, desc) {
-        return task.desc = desc;
+    function changeContent(task, part, change) {
+        return task[part] = change;
     }
-
-    function completeTask(task, status) {
-       return task.complete = status;
-    }
-
-    function changePriority(task, priority) {
-        return task.priority = priority
-    }
-
-    function changeDue(task, due) {
-        return task.due = due;
-    }
-
-    function changeProject(task, project) {
-        return task.project = project;
-    }
-
+    
     return {
-        changeDesc,
         createTasks,
-        completeTask,
-        changePriority,
-        changeDue,
-        changeProject
+        changeContent
     }
 })
 
