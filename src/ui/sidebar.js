@@ -4,12 +4,15 @@ const navContainer = document.createElement("div");
 navContainer.id = "nav";
 
 const homeBtn = document.createElement("button");
+homeBtn.id = "homeBtn"
 homeBtn.textContent = "Home";
 
 const addProject = document.createElement("button");
+addProject.id = "projectBtn"
 addProject.textContent = "Add A Project";
 
 const addTask = document.createElement("button");
+addTask.id = "taskBtn"
 addTask.textContent = "Add A Task";
 
 navContainer.append(homeBtn, addTask, addProject);
