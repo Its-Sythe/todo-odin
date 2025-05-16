@@ -1,3 +1,3 @@
 import './style.css'
-import './logic/logic.js'
-import './ui/ui.js'
+import './logic/main.js'
+import './ui/main.js'
