@@ -9,5 +9,34 @@
         <section class="heading"></section>
         <section class="sidebar"></section>
         <section class="content"></section>
+        <div class="taskModal">
+            <form action="#" method="post" name="taskForm" id="taskForm">
+                <p>Add Task</p>
+                <label for="taskTitle"></label>
+                <input type="text" id="taskTitle" name="taskTitle" placeholder="Title">
+                
+                <label for="taskDesc"></label>
+                <input type="text" id="taskDesc" name="taskDesc" placeholder="Descriptiom">
+                
+                <label for="taskDue"></label>
+                <input type="text" id="taskDue" name="taskDue" placeholder="Due Date">
+                
+                <label for="taskPriority"></label>
+                <input type="text" id="taskPriority" name="taskPriority" placeholder="Priority">
+                
+                <label for="taskProject"></label>
+                <input type="text" id="taskProject" name="taskProject" placeholder="Project">
+
+                <button id="submitTask">Add Task</button>
+            </form>
+        </div>
+        <div class="projectModal">
+            <form action="#" method="post" id="projectForm" name="projectForm">
+                <label for="projectName"></label>
+                <input type="text" id="projectName" name="projectName" placeholder="Project Name">
+
+                <button id="addProject">Add Project</button>
+            </form>
+        </div>
     </body>
 </html>
