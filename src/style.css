@@ -31,7 +31,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: 20%;
+    gap: 15%;
 }
 
 #nav {
@@ -69,3 +69,50 @@ body {
     grid-area: 2 / 2 / 3 / 3;
     background-color: rgb(121, 121, 158);
 }
+
+
+.taskModal, .projectModal {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    box-shadow: 10px 10px 30px 5px rgb(0, 0, 0);
+}
+
+.taskModal{
+    display: flex;
+    height: 500px;
+    width: 500px;
+    padding-top: 5px;
+    background-color: rgb(102, 102, 150);
+}
+
+.taskModal > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.75em;
+}
+
+#taskForm > p {
+    font-size: 2rem;
+    font-family: Courier;
+    font-weight: 700;
+}
+
+#taskForm > input,
+#taskForm > button {
+    font-size: 1.5rem;
+    border-radius: 12px;
+    padding: 7px;
+    box-shadow: 10px 5px 10px 0px rgb(0, 0, 0);
+    font-weight: 600;
+}
+
