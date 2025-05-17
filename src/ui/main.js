@@ -65,6 +65,4 @@ submitTask.addEventListener("click", (event) => {
     displayTask();
 })
 
-displayTask()
-
-var testEslit = "Hello Eslint!"
+displayTask();
