@@ -5,7 +5,6 @@ import { taskManager } from '../logic/tasks.js';
 import { allProjects, allTasks } from '../logic/main.js';
 
 const taskModal = document.querySelector(".taskModal");
-console.log(taskModal)
 
 const addTaskBtn = document.getElementById("taskBtn");
 addTaskBtn.addEventListener("click", () => {
@@ -28,6 +27,7 @@ function validateTask() {
     for (let i = 0; i < taskForm.length; i++) {
         if (taskForm[i].value == "" && taskForm[i] != taskForm['submitTask']) {
             taskForm[i].style.border = "1px solid red";
+            taskModal.style.display = "flex";
         } else if (taskForm[i].value != "" && taskForm[i] != taskForm['submitTask']) {
             const newTask = taskManager.createTask(
                 taskTitle.value,
@@ -40,6 +40,7 @@ function validateTask() {
                 for (let j = 0; j < allTasks.length; j++) {
                     if (allTasks[j].title != newTask.title) {
                         allTasks.push(newTask);
+                        break;
                     } else {
                         return `${newTask.title} already exists`;
                     }
@@ -47,14 +48,21 @@ function validateTask() {
             } else {
                 allTasks.push(newTask);
             }
+            return taskModal.style.display = "none";
         }
     }
+}
+
+function displayTask() {
+    const taskCard = document.getElementById("taskCard");
 }
 
 const submitTask = document.getElementById("submitTask");
 submitTask.addEventListener("click", (event) => {
     event.preventDefault();
     validateTask();
-    console.log(allTasks);
-    taskModal.style.display = "none";
+    console.log(allTasks)
+    displayTask();
 })
+
+displayTask()
