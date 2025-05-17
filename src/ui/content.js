@@ -5,7 +5,6 @@ function getP() {
     return document.createElement("p");
 }
 
-const contentContainer = document.querySelector(".content");
 const taskContainer = document.createElement("div");
 taskContainer.id = "taskCard";
 
@@ -30,8 +29,4 @@ buttonContainer.append(editBtn, deleteBtn);
 
 taskContainer.append(taskTitle, taskDesc, taskDue, taskPriority, taskProject, buttonContainer);
 
-contentContainer.append(taskContainer);
-
-
-
-export const contentSpace = contentContainer;
+export const taskCard = taskContainer
