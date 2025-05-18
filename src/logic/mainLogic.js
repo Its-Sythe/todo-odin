@@ -30,5 +30,3 @@ allTasks.push(defaultTask1, defaultTask2, defaultTask3);
 defaultProject.projectTasks.push(defaultTask1, defaultTask2, defaultTask3);
 
 allProjects.push(defaultProject);
-
-console.log(allProjects, allTasks)
