@@ -9,6 +9,9 @@ import { getDiv, getButton } from "./mainUi";
 const sidebarContent = (function() {
     const sidebar = document.querySelector(".sidebar");
 
+    const topContainer = getDiv();
+    topContainer.id = "topContainer";
+
     const appTitle = document.createElement("p");
     appTitle.id = "appTitle";
     appTitle.textContent = "時 Toki";
@@ -29,6 +32,10 @@ const sidebarContent = (function() {
     completedTasks.textContent = "Completed Tasks";
 
     navContainer.append(allTasks, importantTasks, completedTasks);
+    topContainer.append(appTitle, navContainer);
+
+    const lowerContainer = getDiv();
+    lowerContainer.id = "lowerContainer";
 
     const projects = document.createElement("p");
     projects.id = "projectsTitle";
@@ -42,8 +49,9 @@ const sidebarContent = (function() {
     addProjectBtn.textContent = "Add Project";
 
     projectsContainer.append(addProjectBtn);
+    lowerContainer.append(projects, projectsContainer)
 
-    sidebar.append(appTitle, navContainer, projects, projectsContainer);
+    sidebar.append(topContainer, lowerContainer);
 })();
 
 

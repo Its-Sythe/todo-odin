@@ -9,3 +9,57 @@ body {
     grid-template-columns: 200px 1fr;
     height: 100vh;
 }
+
+.sidebar {
+    background: linear-gradient(180deg, rgb(90, 90, 105), rgb(105, 105, 155), rgb(90, 90, 105));
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 200px;
+}
+
+#topContainer > p, #lowerContainer > p {
+    font-size: 1.25rem;
+    font-weight: 800;
+    font-family: cursive, system-ui;
+    text-decoration: underline;
+}
+
+#topContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#topContainer > #navContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+}
+
+#navContainer > button, #projectsContainer > button {
+    width: 175px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 2px rgb(0, 0, 0);
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px;
+    background-color: rgb(73, 73, 73);
+    color: rgb(40, 242, 165);
+    border-color: rgb(75, 240, 218);
+    text-decoration: underline;
+}
+
+
+#lowerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#lowerContainer > div {
+    padding-left: 15px;
+}

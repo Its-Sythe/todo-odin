@@ -1,4 +1,5 @@
-import './sidebar'
+import './sidebar';
+import { allProjects, allTasks } from '../logic/mainLogic';
 
 function getDiv() {
     return document.createElement('div');
@@ -9,3 +10,5 @@ function getButton() {
 }
 
 export { getDiv, getButton }
+
+
