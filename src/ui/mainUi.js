@@ -11,4 +11,11 @@ function getButton() {
 
 export { getDiv, getButton }
 
+const content = document.querySelector(".content");
 
+function dipslayAllTasks() {
+    return content.append(allTasks)
+}
+
+
+document.getElementById("allTasksTab").addEventListener("click", dipslayAllTasks);
