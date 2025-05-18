@@ -19,9 +19,6 @@ const randomTask = taskManager.createTask(
 )
 
 const contentContainer = document.querySelector(".content");
-const randomCard = createTaskCard(randomTask);
-contentContainer.append(randomCard);
-
 
 const submitTask = document.getElementById("submitTask");
 submitTask.addEventListener("click", (event) => {
@@ -31,6 +28,7 @@ submitTask.addEventListener("click", (event) => {
         allTasks.forEach(task => {
             if (task.title == taskForm['taskTitle'].value) {
                 displayCard(task);
+                console.log(allTasks)
             }
         })
     }

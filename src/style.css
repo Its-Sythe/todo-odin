@@ -67,7 +67,7 @@ body {
 
 .content {
     grid-area: 2 / 2 / 3 / 3;
-    background-color: rgb(121, 121, 158);
+    background-color: rgb(65, 65, 79);
 }
 
 
@@ -113,4 +113,54 @@ body {
     padding: 7px;
     box-shadow: 10px 5px 10px 0px rgb(0, 0, 0);
     font-weight: 600;
+}
+
+.content {
+    display: flex;
+    padding: 10px 0px 0px 0px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+#taskCard {
+    background: linear-gradient(90deg, rgb(117, 117, 143), rgb(112, 110, 110), rgb(89, 88, 88));
+    width: 300px;
+    height: 300px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.5em;
+    font-family: Courier;
+    border-radius: 25px;
+    box-shadow: 5px 10px 10px 5px rgb(183, 148, 239);
+}
+
+#taskCard > p {
+    text-shadow: 2px 2px 5px rgb(183, 148, 239);
+}
+
+#taskBtns {
+    padding-right: 10px;
+    display: flex;
+    align-self: flex-end;
+    gap: 12px;
+}
+
+
+#taskBtns > button {
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    width: 75px;
+    box-shadow: 2px 2px rgb(0, 0, 0);
+}
+
+#editTask {
+    background-color: rgb(120, 154, 204);
+}
+
+#deleteTask {
+    background-color: rgb(250, 50, 50);
 }
