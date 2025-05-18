@@ -1,9 +1,8 @@
-import './content.js'
+import { createTaskCard } from './content.js'
 import './sidebar.js'
 import './heading.js'
 import { taskManager } from '../logic/tasks.js';
 import { allProjects, allTasks } from '../logic/main.js';
-
 const taskModal = document.querySelector(".taskModal");
 
 const addTaskBtn = document.getElementById("taskBtn");
@@ -54,15 +53,18 @@ function validateTask() {
 }
 
 function displayTask() {
-    const taskCard = document.getElementById("taskCard");
+    const contentContainer = document.querySelector(".content");
+    allTasks.forEach(task => {
+        const card = createTaskCard(task);
+        contentContainer.append(card);
+    })
 }
 
 const submitTask = document.getElementById("submitTask");
 submitTask.addEventListener("click", (event) => {
     event.preventDefault();
-    validateTask();
-    console.log(allTasks)
-    displayTask();
+    const result = validateTask();
+    if (result != `${taskForm['taskTitle'].value} already exists`) {
+        displayTask();
+    }
 })
-
-displayTask();
