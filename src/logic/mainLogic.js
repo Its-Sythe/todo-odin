@@ -22,14 +22,14 @@ if (allTasks.includes(newTask)) {
     taskManager.changeProject(newTask, "This Works!")
 }
 
-console.log(allTasks)
-
 const newProject = projectManager.createProject("Default");
-allProjects.push(newProject);
+const extraProject = projectManager.createProject("Extra")
+allProjects.push(newProject, extraProject);
 newProject.projectTasks.push(newTask, extraTask);
 
 projectManager.deleteTask(newProject, newTask);
 allTasks.splice(allTasks.indexOf(newTask), 1);
+projectManager.deleteProject(allProjects, extraProject)
 
 console.log(allProjects);
 console.log(allTasks);

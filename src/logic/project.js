@@ -25,9 +25,18 @@ const projectManager = (function() {
         };
     }
 
+    function deleteProject(projects, project) {
+        if (projects.includes(project)) {
+            return projects.splice(projects.indexOf(project), 1);
+        } else {
+            return `${project.projectName} not found`;
+        };
+    }
+
     return {
         createProject,
-        deleteTask
+        deleteTask,
+        deleteProject
     }
 
 })();
