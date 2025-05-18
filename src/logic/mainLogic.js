@@ -1,6 +1,8 @@
 import { taskManager } from "./task";
+import { projectManager } from "./project";
 
-const allTasks = []
+const allTasks = [];
+const allProjects = [];
 
 const newTask = taskManager.createTask(
     "To Do Project",
@@ -8,10 +10,26 @@ const newTask = taskManager.createTask(
     "2025-05-20"
 )
 
-allTasks.push(newTask);
+const extraTask = taskManager.createTask(
+    "Hello There",
+    "Just a greeting Message",
+    "2025-05-20"
+)
+
+allTasks.push(newTask, extraTask);
 if (allTasks.includes(newTask)) {
     taskManager.changePriority(newTask, "High");
     taskManager.changeProject(newTask, "This Works!")
 }
 
 console.log(allTasks)
+
+const newProject = projectManager.createProject("Default");
+allProjects.push(newProject);
+newProject.projectTasks.push(newTask, extraTask);
+
+projectManager.deleteTask(newProject, newTask);
+allTasks.splice(allTasks.indexOf(newTask), 1);
+
+console.log(allProjects);
+console.log(allTasks);
