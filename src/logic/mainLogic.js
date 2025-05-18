@@ -4,32 +4,31 @@ import { projectManager } from "./project";
 const allTasks = [];
 const allProjects = [];
 
-const newTask = taskManager.createTask(
-    "To Do Project",
-    "To Doing the To Do",
-    "2025-05-20"
-)
+const defaultProject = projectManager.createProject("Default");
 
-const extraTask = taskManager.createTask(
-    "Hello There",
-    "Just a greeting Message",
-    "2025-05-20"
-)
+const defaultTask1 = taskManager.createTask(
+    "Hello",
+    "Welcome to this humble space",
+    "No Due"
+);
 
-allTasks.push(newTask, extraTask);
-if (allTasks.includes(newTask)) {
-    taskManager.changePriority(newTask, "High");
-    taskManager.changeProject(newTask, "This Works!")
-}
+const defaultTask2 = taskManager.createTask(
+    "Defaults",
+    "These are default tasks",
+    "No Due"
+);
 
-const newProject = projectManager.createProject("Default");
-const extraProject = projectManager.createProject("Extra")
-allProjects.push(newProject, extraProject);
-newProject.projectTasks.push(newTask, extraTask);
+const defaultTask3 = taskManager.createTask(
+    "Enjoy",
+    "Hopefully this is comfortable, enjoy",
+    "No Due"
+);
 
-projectManager.deleteTask(newProject, newTask);
-allTasks.splice(allTasks.indexOf(newTask), 1);
-projectManager.deleteProject(allProjects, extraProject)
 
-console.log(allProjects);
-console.log(allTasks);
+allTasks.push(defaultTask1, defaultTask2, defaultTask3);
+
+defaultProject.projectTasks.push(defaultTask1, defaultTask2, defaultTask3);
+
+allProjects.push(defaultProject);
+
+console.log(allProjects, allTasks)

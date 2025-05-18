@@ -16,6 +16,10 @@ const projectManager = (function() {
         return project;
     }
 
+    function addTask(project, task) {
+        return project.projectTasks.push(task);
+    }
+
     function deleteTask(project, task) {
         const tasks = project.projectTasks;
         if (tasks.includes(task)) {
@@ -35,6 +39,7 @@ const projectManager = (function() {
 
     return {
         createProject,
+        addTask,
         deleteTask,
         deleteProject
     }
