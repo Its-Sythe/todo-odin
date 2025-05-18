@@ -1,4 +1,4 @@
-import { createTaskCard } from './content.js'
+import { createTaskCard, validateTask, displayCard } from './content.js'
 import './sidebar.js'
 import './heading.js'
 import { taskManager } from '../logic/tasks.js';
@@ -14,41 +14,24 @@ addTaskBtn.addEventListener("click", () => {
     }
 });
 
-function validateTask() {
-    const taskForm = document.forms['taskForm'];
+const randomTask = taskManager.createTask(
+    "Hello", "Hello", "Hello", "Hello", "Hello"
+)
 
-    const taskTitle = taskForm['taskTitle'];
-    const taskDesc = taskForm['taskDesc'];
-    const taskDue = taskForm['taskDue'];
-    const taskPriority = taskForm['taskPriority'];
-    const taskProject = taskForm['taskProject'];
+const contentContainer = document.querySelector(".content");
+const randomCard = createTaskCard(randomTask);
+contentContainer.append(randomCard);
 
-    for (let i = 0; i < taskForm.length; i++) {
-        if (taskForm[i].value == "" && taskForm[i] != taskForm['submitTask']) {
-            taskForm[i].style.border = "1px solid red";
-            taskModal.style.display = "flex";
-        } else if (taskForm[i].value != "" && taskForm[i] != taskForm['submitTask']) {
-            const newTask = taskManager.createTask(
-                taskTitle.value,
-                taskDesc.value,
-                taskDue.value,
-                taskPriority.value,
-                taskProject.value
-            )
-            if (allTasks.length != 0) {
-                for (let j = 0; j < allTasks.length; j++) {
-                    if (allTasks[j].title != newTask.title) {
-                        allTasks.push(newTask);
-                        break;
-                    } else {
-                        return `${newTask.title} already exists`;
-                    }
-                }
-            } else {
-                allTasks.push(newTask);
+
+const submitTask = document.getElementById("submitTask");
+submitTask.addEventListener("click", (event) => {
+    event.preventDefault();
+    const result = validateTask();
+    if (result != `${taskForm['taskTitle'].value} already exists!`) {
+        allTasks.forEach(task => {
+            if (task.title == taskForm['taskTitle'].value) {
+                displayCard(task);
             }
-            return taskModal.style.display = "none";
-        }
+        })
     }
-}
-
+})
