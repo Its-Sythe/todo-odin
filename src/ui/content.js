@@ -11,7 +11,8 @@ function createTaskCard(task) {
     taskContainer.id = "taskCard";
 
     const taskTitle = getP();
-    taskTitle.textContent = `Title: ${task.title}`
+    taskTitle.textContent = `Title: ${task.title}`;
+    taskTitle.id = "cardTitle";
     const taskDesc = getP();
     taskDesc.textContent = `Description: ${task.desc}`
     const taskDue = getP();
@@ -20,7 +21,7 @@ function createTaskCard(task) {
     taskPriority.textContent = `Priority: ${task.priority}`;
     const taskProject  = getP();
     taskProject.textContent = `Project: ${task.project}`;
-    
+
     const buttonContainer = document.createElement("div");
     buttonContainer.id = "taskBtns"
 

@@ -52,19 +52,3 @@ function validateTask() {
     }
 }
 
-function displayTask() {
-    const contentContainer = document.querySelector(".content");
-    allTasks.forEach(task => {
-        const card = createTaskCard(task);
-        contentContainer.append(card);
-    })
-}
-
-const submitTask = document.getElementById("submitTask");
-submitTask.addEventListener("click", (event) => {
-    event.preventDefault();
-    const result = validateTask();
-    if (result != `${taskForm['taskTitle'].value} already exists`) {
-        displayTask();
-    }
-})
