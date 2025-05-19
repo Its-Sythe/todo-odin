@@ -105,6 +105,7 @@ body {
 }
 
 #addToDoBtn {
+    display: none;
     align-self: flex-end;
     width: 100px;
     height: 25px;
@@ -112,4 +113,18 @@ body {
     box-shadow: 4px 2px 4px 0px rgb(183, 179, 179);
     background-color: rgb(141, 139, 139);
     border: 1px solid whitesmoke;
+}
+
+.taskModal, .projectModal {
+    display: flex;
+    flex: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -150px;
+    background-color: rgb(141, 139, 139);
+    box-shadow: 10px 5px 10px 5px rgb(0, 0, 0);
+    width: 600px;
+    height: 300px;
 }

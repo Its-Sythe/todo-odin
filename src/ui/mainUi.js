@@ -13,6 +13,10 @@ function getButton() {
 export { getDiv, getButton }
 
 
+// document.getElementById("addToDoBtn").addEventListener(
+//     "click", displayTaskModal
+// )
+
 document.getElementById("allTasksTab").addEventListener(
     "click", contentManager.dipslayAllTasks
 );

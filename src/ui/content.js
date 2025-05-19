@@ -3,6 +3,13 @@ import { allTasks } from "../logic/mainLogic";
 
 const contentManager = (function() {
     const content = document.querySelector(".content");
+    
+    const addToDo = getButton();
+    addToDo.id = "addToDoBtn";
+    addToDo.textContent = "Add Task"
+
+    content.append(addToDo);
+
     function createTaskCard(task) {
         const taskCard = getDiv();
         taskCard.id = "taskCard";
@@ -48,16 +55,6 @@ const contentManager = (function() {
         }
         return content;
     }   
-
-    function addTodoBtn() {
-        const addToDo = getButton();
-        addToDo.id = "addToDoBtn";
-        addToDo.textContent = "Add Task"
-
-        content.append(addToDo);
-    }
-
-    addTodoBtn();
 
     return {
         createTaskCard,
