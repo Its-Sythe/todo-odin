@@ -25,8 +25,6 @@ function displayProjectModal() {
 }
 
 
-
-
 document.getElementById("addToDoBtn").addEventListener(
     "click", () => {
         // some code here;
@@ -40,3 +38,11 @@ document.getElementById("addProjectBtn").addEventListener(
 document.getElementById("allTasksTab").addEventListener(
     "click", contentManager.dipslayAllTasks
 );
+
+const projectContainer = document.getElementById('projectsContainer');
+
+allProjects.forEach(project => {
+     const newProject = getButton();
+    newProject.textContent = project.projectName;
+    projectContainer.append(newProject)
+})
