@@ -17,7 +17,7 @@ const projectContainer = document.getElementById('projectsContainer');
 
 allProjects.forEach(project => {
         const newProject = getButton();
-        newProject.id = project.projectName;
+        newProject.id = "project";
         newProject.textContent = project.projectName;
         projectContainer.append(newProject)
 })
@@ -40,19 +40,23 @@ function validateProjectForm() {
     for (let i = 0; i < allProjects.length; i++) {
         allProjectNames.push(allProjects[i].projectName);
     }
-    if (!allProjectNames.includes(projectName) && projectName != "") {
-            const newProject = projectManager.createProject(projectName);
-            allProjects.push(newProject);
-            
-            const newProjectBtn = getButton();
-            newProject.id = projectName;
-            newProjectBtn.textContent = projectName;
-            projectContainer.append(newProjectBtn)
-            
-    } else if (allProjectNames.includes(projectName)) {
-        return `${projectName} already exists!`
+    if (projectName != "") {
+        if (!allProjectNames.includes(projectName)) {
+                const newProject = projectManager.createProject(projectName);
+                allProjects.push(newProject);
+                
+                const newProjectBtn = getButton();
+                newProjectBtn.id = "project"
+                newProjectBtn.textContent = projectName;
+                projectContainer.append(newProjectBtn)
+                
+        } else if (allProjectNames.includes(projectName)) {
+            return `${projectName} already exists!`
+        }
+    } else {
+        projectForm['projectName'].style.border = "1px solid red";
+        return `Fill Form`
     }
-    
 }
 
 
@@ -69,10 +73,10 @@ document.getElementById("addProjectBtn").addEventListener(
 document.getElementById("submitProject").addEventListener(
     "click", (event) => {
         event.preventDefault();
-        displayProjectModal();
         const result = validateProjectForm();
-        console.log(result);
-        console.log(allProjects);
+        if (result != "Fill Form") {
+            displayProjectModal();
+        }
     }
 )
 
