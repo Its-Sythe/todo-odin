@@ -80,6 +80,17 @@ document.getElementById("submitProject").addEventListener(
     }
 )
 
+document.getElementById("project").addEventListener(
+    "click", (event) => {
+        let tgt = event.target;
+        for (let i = 0; i < allProjects.length; i++) {
+            if (allProjects[i].projectName == tgt.textContent) {
+                contentManager.displaySpecificTasks(allProjects[i].projectTasks);
+            }
+        }
+    }
+)
+
 document.getElementById("allTasksTab").addEventListener(
     "click", contentManager.dipslayAllTasks
 );

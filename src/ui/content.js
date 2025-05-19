@@ -56,9 +56,24 @@ const contentManager = (function() {
         return content;
     }   
 
+    function displaySpecificTasks(...task) {
+        if (task.length != 0) {
+            for (let t = 0; t < task.length; t++) {
+                const specificCard = contentManager.createTaskCard(task[t]);
+                console.log(specificCard);
+                content.append(specificCard);
+                return;
+            }
+        }
+
+        const specificCard = contentManager.createTaskCard(task);
+        content.append(specificCard);
+    }
+
     return {
         createTaskCard,
-        dipslayAllTasks
+        dipslayAllTasks,
+        displaySpecificTasks
     }
 })();
 
