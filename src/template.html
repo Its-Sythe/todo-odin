@@ -12,21 +12,35 @@
 
         <div class="taskModal">
             <form action="#" method="post" id="taskForm" name="taskForm">
-                <p>Add A New Task</p>
+                <h1>Add A New Task</h1>
                 <label for="taskName"></label>
                 <input type="text" id="taskName" placeholder="Title">
                 <label for="taskDesc"></label>
                 <input type="text" id="taskDesc" placeholder="Description">
                 <label for="taskDue"></label>
                 <input type="date" id="taskDue">
+                <fieldset id="radioBtn">
+                    <legend>Task Priority</legend>
+                    <label for="high">
+                        Highest<input type="radio" name="priority" id="high">
+                    </label>
+                    <label for="medium">
+                        Medium<input type="radio" name="priority" id="medium">
+                    </label>
+                    <label for="lowest">
+                        Lowest<input type="radio" name="priority" id="lowest" checked>
+                    </label>    
+                </fieldset>
                 <button id="submitTask">Add Task</button>
             </form>
         </div>
         <div class="projectModal">
-            <p>Add A New Project</p>
-            <label for="projectName"></label>
-            <input type="text" id="projectName" placeholder="Project">
-            <button id="submitProject">Add Project</button>
+            <form action="#" method="post" id="projectForm" name="projectForm">
+                <p>Add A New Project</p>
+                <label for="projectName"></label>
+                <input type="text" id="projectName" placeholder="Project">
+                <button id="submitProject">Add Project</button>
+            </form>
         </div>
     </body>
 </html>
