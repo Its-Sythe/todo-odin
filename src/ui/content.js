@@ -40,9 +40,11 @@ const contentManager = (function() {
 
 
     function dipslayAllTasks() {
-        for (let i = 0; i < allTasks.length; i++) {
-            const newCard = contentManager.createTaskCard(allTasks[i]);
-            content.append(newCard);
+        if (content.childNodes.length < allTasks.length) {
+            for (let i = 0; i < allTasks.length; i++) {
+                const newCard = contentManager.createTaskCard(allTasks[i]);
+                content.append(newCard);
+            }
         }
         return content;
     }   
