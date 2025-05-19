@@ -47,6 +47,16 @@ const contentManager = (function() {
         return content;
     }   
 
+    function addTodoBtn() {
+        const addToDo = getButton();
+        addToDo.id = "addToDoBtn";
+        addToDo.textContent = "Add Task"
+
+        content.append(addToDo);
+    }
+
+    addTodoBtn();
+
     return {
         createTaskCard,
         dipslayAllTasks

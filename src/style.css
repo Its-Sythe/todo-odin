@@ -74,7 +74,7 @@ body {
     flex-direction: column;
     flex: 1;
     gap: 12px;
-    padding: 5px 0px 0px 5px;
+    padding: 5px 5px 0px 5px;
 }
 
 #taskCard {
@@ -102,4 +102,14 @@ body {
     font-weight: 700;
     padding: 2px 5px;
     box-shadow: 3px 2px 3px 0px rgb(141, 139, 139);
+}
+
+#addToDoBtn {
+    align-self: flex-end;
+    width: 100px;
+    height: 25px;
+    border-radius: 10px;
+    box-shadow: 4px 2px 4px 0px rgb(183, 179, 179);
+    background-color: rgb(141, 139, 139);
+    border: 1px solid whitesmoke;
 }
