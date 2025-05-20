@@ -82,11 +82,13 @@ document.getElementById("submitProject").addEventListener(
 
 document.getElementById("project").addEventListener(
     "click", (event) => {
+        const content = document.querySelector(".content")
         let tgt = event.target;
         for (let i = 0; i < allProjects.length; i++) {
             if (allProjects[i].projectName == tgt.textContent) {
-                contentManager.displaySpecificTasks(allProjects[i].projectTasks);
-                tgt.disabled = true;
+                if (content.childNodes.length < allProjects[i].projectTasks.length) {
+                    contentManager.displaySpecificTasks(allProjects[i].projectTasks);
+                }
             }
         }
     }
@@ -95,3 +97,11 @@ document.getElementById("project").addEventListener(
 document.getElementById("allTasksTab").addEventListener(
     "click", contentManager.dipslayAllTasks
 );
+
+
+const content = document.querySelector(".content");
+
+for (let t = 0; t < allTasks.length; t++) {
+    const card = contentManager.createTaskCard(allTasks[t]);
+    content.append(card)
+}

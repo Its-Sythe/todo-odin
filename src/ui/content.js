@@ -60,8 +60,8 @@ const contentManager = (function() {
         const specificTasks = task[0];
         if (specificTasks.length != 0) {
             for (let t = 0; t < specificTasks.length; t++) {
-                const specificTaskCard = contentManager.createTaskCard(specificTasks[t]);
-                content.append(specificTaskCard);
+                    const specificTaskCard = contentManager.createTaskCard(specificTasks[t]);
+                    content.append(specificTaskCard);
             }
         }
     }
