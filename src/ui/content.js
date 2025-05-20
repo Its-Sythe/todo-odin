@@ -57,13 +57,15 @@ const contentManager = (function() {
 
     function handleDelete() {
         const deleteBtns = document.querySelectorAll("#deleteTask");
-        deleteBtns.forEach(btn => {
-            btn.addEventListener("click", (event) => {
-                let tgt = event.target.parentNode.parentNode;
-                let ultTgt = tgt.childNodes[0].textContent;
-                contentManager.removeTask(ultTgt, tgt);
+        if (content.childNodes.length > 1) {
+            deleteBtns.forEach(btn => {
+                btn.addEventListener("click", (event) => {
+                    let tgt = event.target.parentNode.parentNode;
+                    let ultTgt = tgt.childNodes[0].textContent;
+                    contentManager.removeTask(ultTgt, tgt);
+                })
             })
-        })
+        }
     }
     
     function removeTask(title, target) {
