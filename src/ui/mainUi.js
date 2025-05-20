@@ -86,6 +86,7 @@ document.getElementById("project").addEventListener(
         for (let i = 0; i < allProjects.length; i++) {
             if (allProjects[i].projectName == tgt.textContent) {
                 contentManager.displaySpecificTasks(allProjects[i].projectTasks);
+                tgt.disabled = true;
             }
         }
     }
@@ -94,5 +95,3 @@ document.getElementById("project").addEventListener(
 document.getElementById("allTasksTab").addEventListener(
     "click", contentManager.dipslayAllTasks
 );
-
-

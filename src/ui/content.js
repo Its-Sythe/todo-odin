@@ -57,17 +57,13 @@ const contentManager = (function() {
     }   
 
     function displaySpecificTasks(...task) {
-        if (task.length != 0) {
-            for (let t = 0; t < task.length; t++) {
-                const specificCard = contentManager.createTaskCard(task[t]);
-                console.log(specificCard);
-                content.append(specificCard);
-                return;
+        const specificTasks = task[0];
+        if (specificTasks.length != 0) {
+            for (let t = 0; t < specificTasks.length; t++) {
+                const specificTaskCard = contentManager.createTaskCard(specificTasks[t]);
+                content.append(specificTaskCard);
             }
         }
-
-        const specificCard = contentManager.createTaskCard(task);
-        content.append(specificCard);
     }
 
     return {
