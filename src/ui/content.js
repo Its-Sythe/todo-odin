@@ -3,6 +3,14 @@ import { allTasks, allProjects } from "../logic/logic";
 const content = document.querySelector(".content");
 
 const contentManager = (function() {
+    function displayAddBtn() {
+        const addToDo = document.createElement("button");
+        addToDo.id = "addTask";
+        addToDo.textContent = "Add Task";
+
+        content.append(addToDo);
+    }
+
     function createTaskCard(task) {
         const taskCard = document.createElement("div");
         taskCard.id = "taskCard";
@@ -46,23 +54,32 @@ const contentManager = (function() {
             content.append(newCard);
         }
     }
+
+    function handleDelete() {
+        const deleteBtns = document.querySelectorAll("#deleteTask");
+        deleteBtns.forEach(btn => {
+            btn.addEventListener("click", (event) => {
+                let tgt = event.target.parentNode.parentNode;
+                let ultTgt = tgt.childNodes[0].textContent;
+                contentManager.removeTask(ultTgt, tgt);
+            })
+        })
+    }
     
-    function removeTask(title) {
-        const taskCard = document.getElementById("taskCard");
-        if (taskCard.childNodes[0].textContent == title) {
-            taskCard.remove();
-            for (let t = 0; t < allTasks.length; t++) {
-                if (allTasks[t].title == title) {
-                    return allTasks.splice(allTasks[t], 1);
-                }
+    function removeTask(title, target) {
+        target.remove();
+        for (let t = 0; t < allTasks.length; t++) {
+            if (allTasks[t].title == title) {
+                return allTasks.splice(allTasks.indexOf(allTasks[t]), 1);
             }
-            return;
         }
     }  
 
     return {
+        displayAddBtn,
         displayAllTasks,
-        removeTask
+        removeTask,
+        handleDelete
     }
 })()
 
