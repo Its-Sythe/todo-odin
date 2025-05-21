@@ -3,7 +3,7 @@ import { projectManager } from "./projects";
 
 export const allProjects = [
     {
-        projectName: "Hello There",
+        projectName: "Default",
         projectTasks: []
     }
 ];
