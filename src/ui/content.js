@@ -55,33 +55,10 @@ const contentManager = (function() {
         }
     }
 
-    function handleDelete() {
-        const deleteBtns = document.querySelectorAll("#deleteTask");
-        if (content.childNodes.length > 1) {
-            deleteBtns.forEach(btn => {
-                btn.addEventListener("click", (event) => {
-                    let tgt = event.target.parentNode.parentNode;
-                    let ultTgt = tgt.childNodes[0].textContent;
-                    contentManager.removeTask(ultTgt, tgt);
-                })
-            })
-        }
-    }
-    
-    function removeTask(title, target) {
-        target.remove();
-        for (let t = 0; t < allTasks.length; t++) {
-            if (allTasks[t].title == title) {
-                return allTasks.splice(allTasks.indexOf(allTasks[t]), 1);
-            }
-        }
-    }  
+
 
     return {
-        displayAddBtn,
-        displayAllTasks,
-        removeTask,
-        handleDelete
+        displayAllTasks
     }
 })()
 

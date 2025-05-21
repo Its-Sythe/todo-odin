@@ -6,8 +6,6 @@ import { contentManager } from './content';
 const allTasksBtn = document.getElementById("myTasks");
 allTasksBtn.addEventListener(
     "click", () => {
-        contentManager.displayAddBtn();
-        contentManager.displayAllTasks(allTasks);
-        contentManager.handleDelete();
+        console.log("Ehh")
     }
 )
