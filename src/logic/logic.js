@@ -1,6 +1,4 @@
-let allTasks = [
-    {title: "Hello", desc: "Not Hello really", due: "Idk", priority: "Hmm"}
-];
+let allTasks = [];
 let allProjects = []
 
 const taskManager = (function() {
@@ -26,9 +24,17 @@ const taskManager = (function() {
             return `${task.title} does not exist`
         }
     }
+
+    function markComplete(task) {
+        if (task['complete']) {
+            return task['complete'] = 'Off'
+        }
+        return task['complete'] = 'On';
+    }
     return {
         createTask,
-        editTask
+        editTask,
+        markComplete
     }
 })();
 
@@ -76,15 +82,5 @@ const projectManager = (function() {
     }
 })();
 
-const anotherTask = taskManager.createTask("Not Hello", "This is really hello", "Not sure", "Hmmeo");
-taskManager.editTask(anotherTask, 'title', 'nothing');
 
-console.log(allTasks)
-
-const newProject = projectManager.createProject("Default");
-
-projectManager.addTask(newProject, anotherTask);
-
-projectManager.deleteTask(anotherTask);
-
-console.log(allProjects)
+export { allTasks, allProjects, taskManager, projectManager }
