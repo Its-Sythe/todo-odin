@@ -1,15 +1,18 @@
 const taskManager = (function() {
     const allTasks = [];
-    function createTask(title, desc, due, priority) {
-        return {
-            title, desc, due, priority
+    class task {
+        constructor(title, desc, due, priority) {
+            this.title = title;
+            this.desc = desc;
+            this.due = due;
+            this.priority = priority
         }
     }
 
 
     return {
         allTasks,
-        createTask
+        task
     }
 })();
 
@@ -58,10 +61,7 @@ const defaultProject = projectManager.createProject("Default");
 const duplicateDefault = projectManager.createProject("Default");
 const newProject = projectManager.createProject("Hello");
 
-const newTask = taskManager.createTask("Hello", "Hello", "2025-05-20", "No");
-console.log(projectManager.allProjects)
-taskManager.allTasks.push(newTask)
-projectManager.addTask(newTask, defaultProject)
-
+const newTask = new taskManager.task("Hello", "Dead", "Eternal", "Low");
+console.log(newTask)
 
 export { taskManager, projectManager }
