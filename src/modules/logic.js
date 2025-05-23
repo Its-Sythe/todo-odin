@@ -2,9 +2,9 @@ let allTasks = [];
 let allProjects = []
 
 const taskManager = (function() {
-    function createTask(title, desc, due, priority) {
+    function createTask(title, due, priority) {
         const newTask = {
-            title, desc, due, priority
+            title, due, priority
         }
         if (allTasks.length > 0) {
             const result = allTasks.filter((task) => task.title == newTask.title);
@@ -15,6 +15,8 @@ const taskManager = (function() {
                 return `${newTask.title} already exists`
             }
         }
+        allTasks.push(newTask)
+        return newTask;
     }
 
     function editTask(task, context, change) {
@@ -81,6 +83,5 @@ const projectManager = (function() {
         deleteTask
     }
 })();
-
 
 export { allTasks, allProjects, taskManager, projectManager }

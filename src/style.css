@@ -1,0 +1,110 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 175px 1fr;
+}
+
+h1 {
+    text-decoration: underline;
+    font-size: 1.75em;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Sidebar related stuff */
+
+.sidebar {
+    padding: 5px;
+    display: grid;
+    grid-template-rows: 30px 200px 250px;
+    row-gap: 10px;
+    background-color: rgb(235, 231, 187);
+}
+
+.display-tasks > button > svg, .display-projects > button > svg{
+    width: 25%;
+}
+
+.sidebar > .display-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.display-tasks > button, .display-projects > button {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: 700;
+    gap: 12px;
+    width: 150px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: rgb(235, 231, 187);
+    cursor: pointer;
+}
+
+.display-tasks > button:hover, .display-projects > button:hover {
+    background-color: rgb(254, 153, 94);
+}
+
+
+/* Task Modal stuff  */
+.task-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    width: 350px;
+    height: 175px;
+    background-color: rgb(254, 153, 94);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 10px 10px 25px 15px rgb(0, 0, 0);
+    display: none;
+}
+
+
+#task-form {
+    padding-top: 5px;
+    display: grid;
+    grid-template-rows: 70px 70px 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+#task-name {
+    height: 60px;
+    border: 0px;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    cursor: text;
+}
+
+#task-form > #selector-portion {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 39%;
+}
+
+#task-due, #task-priority {
+    font-weight: 900;
+}
+
+#task-form > #submit-task {
+    justify-self: flex-end;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 0px;
+    padding: 5px;
+}
