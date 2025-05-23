@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+}
+
+
+.sidebar {
+    display: grid;
+    grid-template-rows: 35px 150px 1fr;
+    padding: 5px;
+    background-color: rgb(100, 100, 114);
+    row-gap: 3px;
+}
+
+.sidebar > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: courier;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.sidebar > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 26px;
+}
+
+.sidebar > div > button {
+    font-size: 1.1em;
+    font-weight: 800;
+    width: 175px;
+    border-radius: 10px;
+    border: 0px;
+}
