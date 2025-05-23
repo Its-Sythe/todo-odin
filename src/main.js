@@ -1,2 +1,2 @@
 import './style.css'
-import './logic'
+import { taskManager, projectManager } from './logic';
