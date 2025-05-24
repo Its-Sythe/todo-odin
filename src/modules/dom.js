@@ -1,6 +1,37 @@
 import { allTasks, createTask } from "./todo";
 import { allProjects, createProject } from "./project";
 
+function createTaskCard(task) {
+    let content = document.querySelector(".content");
+    let taskCard = document.createElement("div");
+    taskCard.className = "task-card";
+
+    let cardDetails = document.createElement("div");
+    cardDetails.className = "card-details";
+    let cardTitle = document.createElement('p');
+    cardTitle.id = "card-title";
+    cardTitle.textContent = task.title;
+    let cardDue = document.createElement('p');
+    cardDue.id = "card-due";
+    cardDue.textContent = task.due;
+    
+    cardDetails.append(cardTitle, cardDue);
+
+    let cardOptions = document.createElement("div");
+    cardOptions.className = "card-options";
+    let editBtn = document.createElement("button");
+    editBtn.id = 'edit-task';
+    editBtn.textContent = 'Edit';
+    let deleteBtn = document.createElement("button");
+    deleteBtn.id = 'delete-task';
+    deleteBtn.textContent = 'Delete';
+
+    cardOptions.append(editBtn, deleteBtn)
+
+    taskCard.append(cardDetails, cardOptions)
+    content.append(taskCard)
+}
+
 function displayTaskModal() {
     let taskModal = document.querySelector(".task-modal");
     if (taskModal.style.display == 'none' || taskModal.style.display == "") {
@@ -18,10 +49,11 @@ function validateTaskForm() {
     const taskPriority = taskForm['task-priority'].value;
 
     if (taskName != "" && taskDue != "") {
-        createTask(
+        let newTask = createTask(
             taskName, taskDue, taskPriority
         )
         taskModal.style.display = "none";
+        return newTask;
     } else if (taskName == "" || taskDue == "") {
         alert("Fill the form please")
     }
@@ -34,5 +66,6 @@ addTaskBtn.addEventListener("click", displayTaskModal);
 const submitTaskBtn = document.getElementById("submit-task");
 submitTaskBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    validateTaskForm()
+    const task = validateTaskForm();
+    createTaskCard(task);
 });
