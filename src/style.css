@@ -25,7 +25,7 @@ button {
     display: grid;
     grid-template-rows: 30px 200px 250px;
     row-gap: 10px;
-    background-color: rgb(235, 231, 187);
+    background-color: #1C1F2A;
 }
 
 .display-tasks > button > svg, .display-projects > button > svg{
@@ -47,14 +47,56 @@ button {
     width: 150px;
     border: 0px;
     border-radius: 10px;
-    background-color: rgb(235, 231, 187);
+    background-color: #4FB3FF;
     cursor: pointer;
+    box-shadow: 5px 7px 5px 0px #4FB3FF;
+    border: 1px solid #463cfc;
 }
 
 .display-tasks > button:hover, .display-projects > button:hover {
-    background-color: rgb(254, 153, 94);
+    background-color: #6d63f4;
 }
 
+/* Content related stuff */
+.content {
+    background-color: #2A2E3E;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Task Card */
+.task-card {
+    background-color: #3e4257;
+    color: #e4e4e4;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 70px 30px;
+    padding: 5px;
+    height: 100px;
+    box-shadow: 0px 7px 14px 0px rgb(0, 0, 0);
+}
+
+.card-details {
+    align-self: center;
+    font-size: 1.5em;
+}
+
+.card-options {
+    justify-self: flex-end;
+    width: 150px;
+    display: flex;
+    gap: 15px;
+}
+
+.card-options > button {
+    width: 68px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 700;
+    background-color: #8492bb;
+}
 
 /* Task Modal stuff  */
 .task-modal {
@@ -62,31 +104,34 @@ button {
     top: 50%;
     left: 50%;
     margin-left: -150px;
-    width: 350px;
-    height: 175px;
-    background-color: rgb(254, 153, 94);
+    margin-top: -150px;
+    width: 400px;
+    height: 200px;
+    background: linear-gradient(90deg, rgb(74, 62, 204), rgb(69, 81, 206), rgb(107, 105, 250));
     border-radius: 10px;
     padding: 5px;
     box-shadow: 10px 10px 25px 15px rgb(0, 0, 0);
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
 
 #task-form {
-    padding-top: 5px;
     display: grid;
-    grid-template-rows: 70px 70px 30px;
+    grid-template-rows: 80px 60px 40px;
     align-items: center;
-    justify-content: center;
 }
 
 #task-name {
-    height: 60px;
+    height: 65px;
+    width: 375px;
     border: 0px;
     padding: 5px;
     border-radius: 10px;
     font-size: 1.5em;
     cursor: text;
+    color: rgb(148, 131, 255);
 }
 
 #task-form > #selector-portion {
@@ -97,7 +142,12 @@ button {
 }
 
 #task-due, #task-priority {
+    font-size: 1.1em;
     font-weight: 900;
+    border-radius: 10px;
+    padding: 5px;
+    border: 0px;
+    box-shadow: 0px 10px 15px 0px rgb(46, 123, 248);
 }
 
 #task-form > #submit-task {
@@ -107,4 +157,6 @@ button {
     border-radius: 10px;
     border: 0px;
     padding: 5px;
+    box-shadow: 0px 10px 25px 0px rgb(46, 123, 248);
 }
+
