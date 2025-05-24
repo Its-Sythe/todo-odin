@@ -1,17 +1,3 @@
-import { validator } from "./validate";
+import { allTasks, createTask } from "./todo";
+import { allProjects, createProject } from "./project";
 
-const addBtn = document.querySelector(".add-task");
-addBtn.addEventListener(
-    "click", () => {
-        validator.handleTaskModalDisplay();
-    }
-)
-
-const submitTaskBtn = document.getElementById("submit-task");
-submitTaskBtn.addEventListener(
-    "click", (event) => {
-        event.preventDefault();
-        validator.validateTaskForm();
-        validator.handleTaskModalDisplay();
-    }
-)
