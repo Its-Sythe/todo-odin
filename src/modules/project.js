@@ -26,13 +26,14 @@ function createProject(name) {
             return `${task.title} was never found`
         }
     }
-
-   if (!allProjects.some(projects => projects.name === project.name)) {
-        allProjects.push(project);
-        return project;
-   } else if (allProjects.some(projects => projects.name === project.name)) {
-    return `${project.name} already exists`
-   }
+    if (allProjects.length != 0) {
+        if (allProjects.some(projects => projects.name !== project.name)) {
+                return allProjects.push(project);
+        } else if (allProjects.some(projects => projects.name === project.name)) {
+            return `${project.name} already exists`
+        }
+    }
+    return allProjects.push(project);
 }
 
 export { allProjects, createProject }

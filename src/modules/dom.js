@@ -32,6 +32,16 @@ function createTaskCard(task) {
     content.append(taskCard)
 }
 
+function createProjectBtn(name){
+    const projectContainer = document.querySelector(".display-projects");
+    const projectBtn = document.createElement("button");
+    projectBtn.className = 
+    projectBtn.id = name;
+    projectBtn.textContent = name;
+
+    projectContainer.append(projectBtn);
+}
+
 function displayTaskModal() {
     let taskModal = document.querySelector(".task-modal");
     if (taskModal.style.display == 'none' || taskModal.style.display == "") {
@@ -59,6 +69,14 @@ function validateTaskForm() {
     }
 }
 
+function validateProject(projectName) {
+    const result = createProject(projectName);
+    console.log(result);
+    if (result >= 1) {
+        createProjectBtn(projectName);
+    }
+}
+
 const addTaskBtn = document.querySelector(".add-task");
 addTaskBtn.addEventListener("click", displayTaskModal);
 
@@ -69,3 +87,12 @@ submitTaskBtn.addEventListener("click", (event) => {
     const task = validateTaskForm();
     createTaskCard(task);
 });
+
+const addProjectBtn = document.querySelector(".add-project");
+addProjectBtn.addEventListener(
+    "click", () => {
+        const newProject = prompt("Enter project name: ");
+        validateProject(newProject);
+        return newProject
+    }
+)
