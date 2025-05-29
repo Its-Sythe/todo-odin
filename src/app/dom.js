@@ -36,7 +36,7 @@ function createTaskCard(task) {
 function createProjectBtn(name){
     const projectContainer = document.querySelector(".display-projects");
     const projectBtn = document.createElement("button");
-    projectBtn.className = 
+    projectBtn.className = "project";
     projectBtn.id = name;
     projectBtn.textContent = name;
 
@@ -85,6 +85,15 @@ function validateProject(projectName) {
     }
 }
 
+function displayProjectTasks(project) {
+    if (project.tasks.length != 0) {
+        for (let p = 0; p < project.tasks.length; p++) {
+            let currentTaskCard = createTaskCard(project.tasks[p]);
+            return currentTaskCard;
+        }
+    }
+}
+
 const addTaskBtn = document.querySelector(".add-task");
 addTaskBtn.addEventListener("click", displayTaskModal);
 
@@ -101,6 +110,7 @@ addProjectBtn.addEventListener(
     "click", () => {
         const newProject = prompt("Enter project name: ");
         validateProject(newProject);
+        console.log(newProject)
         return newProject
     }
 )
