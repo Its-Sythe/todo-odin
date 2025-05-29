@@ -9,7 +9,7 @@ body {
     grid-template-columns: 175px 1fr;
 }
 
-h1 {
+#app-name {
     text-decoration: underline;
     font-size: 1.75em;
     color: #e4e4e4;
