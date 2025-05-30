@@ -37,7 +37,6 @@ function createProjectBtn(name){
     const projectContainer = document.querySelector(".display-projects");
     const projectBtn = document.createElement("button");
     projectBtn.className = "project";
-    projectBtn.id = name;
     projectBtn.textContent = name;
 
     projectContainer.append(projectBtn);
@@ -50,6 +49,7 @@ function displayTaskModal() {
     } else if (taskModal.style.display == 'flex') {
         return taskModal.style.display = 'none';
     }
+    return taskBtnClicked = true;
 }
 
 function validateTaskForm() {
@@ -93,7 +93,6 @@ function displayProjectTasks(project) {
         }
     }
 }
-
 const addTaskBtn = document.querySelector(".add-task");
 addTaskBtn.addEventListener("click", displayTaskModal);
 
@@ -122,8 +121,5 @@ projectsContainer.addEventListener("click", (event)  => {
     let tgt = event.target;
     if (tgt.className != "add-project" && tgt.className != "display-projects") {
         tgt.id = 'active';
-        // Need to make it so that if the add task btn is clicked
-        // when there is an active project then that task is added
-        // to the active project tasks list O_o
     }
 })
