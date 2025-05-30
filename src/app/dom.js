@@ -110,7 +110,20 @@ addProjectBtn.addEventListener(
     "click", () => {
         const newProject = prompt("Enter project name: ");
         validateProject(newProject);
-        console.log(newProject)
         return newProject
     }
 )
+
+const tasksContainer = document.querySelector(".display-tasks")
+
+
+const projectsContainer = document.querySelector(".display-projects");
+projectsContainer.addEventListener("click", (event)  => {
+    let tgt = event.target;
+    if (tgt.className != "add-project" && tgt.className != "display-projects") {
+        tgt.id = 'active';
+        // Need to make it so that if the add task btn is clicked
+        // when there is an active project then that task is added
+        // to the active project tasks list O_o
+    }
+})
