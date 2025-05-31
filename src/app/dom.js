@@ -128,7 +128,7 @@ addProjectBtn.addEventListener(
     "click", () => {
         const newProject = prompt("Enter project name: ");
         validateProject(newProject);
-        return newProject
+        return newProject;
     }
 )
 
