@@ -24,12 +24,12 @@ button {
 .sidebar {
     padding: 5px;
     display: grid;
-    grid-template-rows: 30px 150px 1fr;
+    grid-template-rows: 30px 150px 50px 1fr;
     row-gap: 10px;
     background-color: #1C1F2A;
 }
 
-.display-tasks > button > svg, .display-projects > button > svg{
+.display-tasks > button > svg, .add-project > svg{
     width: 25%;
 }
 
@@ -39,7 +39,8 @@ button {
     gap: 12px;
 }
 
-.display-tasks > button, .display-projects > button {
+
+.display-tasks > button, .display-projects > button, .add-project {
     display: flex;
     align-items: center;
     font-size: 1.2em;
@@ -54,7 +55,7 @@ button {
     padding: 5px;
 }
 
-.display-tasks > button:hover, .display-projects > button:hover {
+.display-tasks > button:hover, .display-projects > button:hover, .add-project:hover {
     background-color: #6d63f4;
 }
 

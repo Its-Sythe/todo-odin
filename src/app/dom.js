@@ -93,6 +93,25 @@ function displayProjectTasks(project) {
         }
     }
 }
+
+function handleActiveProject(event) {
+    let tgt = event.target;
+    let parentTgt = tgt.parentNode;
+    let arrayOfChildNodes = Array.from(parentTgt.childNodes);
+    let result = arrayOfChildNodes.some(child => child.id === 'active');
+    if (tgt.className !== 'project') {
+        return false;
+    } 
+
+    if (result === false) {
+        return tgt.id = 'active';
+    } else if (result === true) {
+        let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
+        arrayOfChildNodes[activeProject].id = 'inactive';
+        return tgt.id = 'active';
+    }
+}
+
 const addTaskBtn = document.querySelector(".add-task");
 addTaskBtn.addEventListener("click", displayTaskModal);
 
@@ -117,9 +136,4 @@ const tasksContainer = document.querySelector(".display-tasks")
 
 
 const projectsContainer = document.querySelector(".display-projects");
-projectsContainer.addEventListener("click", (event)  => {
-    let tgt = event.target;
-    if (tgt.className != "add-project" && tgt.className != "display-projects") {
-        tgt.id = 'active';
-    }
-})
+projectsContainer.addEventListener("click", handleActiveProject);
