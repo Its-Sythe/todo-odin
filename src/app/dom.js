@@ -112,6 +112,15 @@ function handleActiveProject(event) {
     }
 }
 
+function handleAddTaskToActivePorject(project, task) {
+    if (project.tasks.some(projectTask => projectTask.title !== task.title)) {
+        project.tasks.push(task);
+        return;
+    } else if (project.tasks.some(projectTask => projectTask.title) === task.title) {
+        return `${task} already exists`
+    }
+}
+
 const addTaskBtn = document.querySelector(".add-task");
 addTaskBtn.addEventListener("click", displayTaskModal);
 
