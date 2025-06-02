@@ -1,182 +1,73 @@
+:root {
+    --base-font: Courier, cursive, sans-serif;
+    --base-font-weight: 700;
+}
+
 * {
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
+}
+
+* > li {
+    list-style: none;
 }
 
 body {
+    background-image: linear-gradient(to bottom left, #f5f5f5, #d8a281 40%, #7b3f00);
     height: 100vh;
     display: grid;
-    grid-template-columns: 175px 1fr;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 100%;
 }
 
-#app-name {
-    text-decoration: underline;
-    font-size: 1.75em;
-    color: #e4e4e4;
-}
-
-button {
-    cursor: pointer;
-}
-
-/* Sidebar related stuff */
-
-.sidebar {
-    padding: 5px;
-    display: grid;
-    grid-template-rows: 30px 150px 50px 1fr;
-    row-gap: 10px;
-    background-color: #1C1F2A;
-}
-
-.display-tasks > button > svg, .add-project > svg{
-    width: 25%;
-}
-
-.sidebar > .display-tasks {
+.nav-side {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    border-right: 1px solid;
+    padding: .5rem;
+    font-family: var(--base-font);
+    font-weight: var(--base-font-weight);
+    gap: 1rem;
+    max-width: 220px;
 }
 
+.app-name, .projects-nav-title {
+    font-family: var(--base-font);
+    font-weight: var(--base-font-weight);
+    font-size: 1.5rem;
+    text-decoration: underline;
+    color: #f5f5f5;
+}
 
-.display-tasks > button, .display-projects > button, .add-project {
+li > svg {
+    width: 15%;
+}
+
+.tasks-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: .25rem;
+}
+
+.tasks-nav > li {
     display: flex;
     align-items: center;
-    font-size: 1.2em;
-    font-weight: 700;
-    gap: 12px;
-    width: 150px;
-    border-radius: 10px;
-    background-color: #4FB3FF;
-    cursor: pointer;
-    box-shadow: 5px 7px 5px 0px #4FB3FF;
-    border: 1px solid #463cfc;
-    padding: 5px;
-}
-
-.display-tasks > button:hover, .display-projects > button:hover, .add-project:hover {
-    background-color: #6d63f4;
-}
-
-.display-projects {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Content related stuff */
-.content {
-    background-color: #2A2E3E;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Task Card */
-.task-card {
-    background-color: #3e4257;
-    color: #e4e4e4;
-    border-radius: 10px;
-    display: grid;
-    grid-template-rows: 70px 30px;
-    padding: 5px;
-    height: 100px;
-    box-shadow: 0px 7px 14px 0px rgb(0, 0, 0);
-}
-
-.card-details {
-    align-self: center;
+    gap: 2.5%;
     font-size: 1.5em;
+    cursor: pointer;
 }
 
-.card-options {
-    justify-self: flex-end;
-    width: 150px;
+.tasks-nav > li:hover {
+    background-color: rgba(245, 245, 245, 0.3);
+}
+
+.projects-nav {
     display: flex;
-    gap: 15px;
-}
-
-.card-options > button {
-    width: 68px;
-    border-radius: 10px;
-    font-size: 1em;
-    font-weight: 700;
-    background-color: #8492bb;
-}
-
-/* Task Modal stuff  */
-.task-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px;
-    margin-top: -150px;
-    width: 400px;
-    height: 200px;
-    background: linear-gradient(90deg, rgb(74, 62, 204), rgb(69, 81, 206), rgb(107, 105, 250));
-    border-radius: 10px;
-    padding: 5px;
-    box-shadow: 10px 10px 25px 15px rgb(0, 0, 0);
-    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-
-#task-form {
-    display: grid;
-    grid-template-rows: 80px 60px 40px;
-    align-items: center;
-}
-
-#task-name {
-    height: 65px;
-    width: 375px;
-    border: 0px;
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 1.5em;
-    cursor: text;
-    color: rgb(148, 131, 255);
-}
-
-#task-form > #selector-portion {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 39%;
-}
-
-#task-due, #task-priority {
-    font-size: 1.1em;
-    font-weight: 900;
-    border-radius: 10px;
-    padding: 5px;
-    border: 0px;
-    box-shadow: 0px 10px 15px 0px rgb(46, 123, 248);
-}
-
-#last-portion {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#last-portion > label > input {
-    width: 200px;
-    height: 20px;
-    border-radius: 10px;
-    border: 0px;
-    padding: 5px;
-}
-
-#last-portion > button {
-    height: 30px;
-    width: 75px;
-    font-size: 1em;
-    font-weight: 800;
-    border-radius: 10px;
-    border: 0px;
+    gap: .5rem;
 }
