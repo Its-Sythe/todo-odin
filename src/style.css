@@ -37,6 +37,7 @@ body {
     font-size: 1.75rem;
     text-decoration: underline;
     color: #f5f5f5;
+    align-self: center;
 }
 
 li > svg {
@@ -63,6 +64,7 @@ li > svg {
 
 .tasks-nav > li:hover, .projects-nav > li:hover {
     background-color: rgba(245, 245, 245, 0.3);
+    border-radius: 100vmax;
 }
 
 .projects-nav {
@@ -104,7 +106,7 @@ li > svg {
 .add-project:hover {
     border: 0px;
     border-radius: 10px;
-    background-color: rgba(245, 245, 245, 0);
+    background-color: rgba(245, 245, 245, 0.3);
 }
 
 .add-project > svg {
@@ -113,10 +115,54 @@ li > svg {
 
 .modal {
     position: absolute;
-    inset: 0;
-    z-index: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(245, 245, 245, 0.3);
+    border-radius: 10px;
+    box-shadow: 10px 10px 25px 10px rgb(0, 0, 0);
+}
+
+
+#project-form-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    padding: 1.5rem;
+}
+
+#modal-form-name {
+    align-self: center;
+}
+
+#project-name {
+    height: 60px;
+    border-radius: 10px;
+    border: 0px;
+    padding: 5px;
+    font-size: 1.5rem;
+    box-shadow: 0px 10px 25px 0px rgb(0, 0, 0);
+}
+
+#submit-project {
+    border-radius: 10px;
+    width: 40%;
+    align-self:last baseline;
+    border: 0px;
+    padding: .75rem;
+    font-size: .95rem;
+    font-family: var(--base-font);
+    font-weight: var(--base-font-weight);
+    cursor: pointer;
+    box-shadow: 4px 10px 30px 0px rgb(0, 0, 0);
+}
+
+#close-project-modal-btn {
+    width: 10%;
+    position: absolute;
+    align-self: last baseline;
+    cursor: pointer;
 }
