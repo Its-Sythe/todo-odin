@@ -1,7 +1,12 @@
 // This will handle the creation of projects
 // And their manipulation
 
-let allProjects = [];
+let allProjects = [
+    {
+        name: 'Not Default',
+        tasks: []
+    }
+];
 
 function createProject(name) {
     let project = {

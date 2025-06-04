@@ -7,11 +7,79 @@ const weeklyBtn = document.querySelector('.nav-weekly');
 const popUpProject = document.querySelector('.add-project');
 const modalContainer = document.querySelector('.modal');
 const content = document.querySelector(".main-content");
+const projectContainer = document.querySelector(".projects-nav");
 
 const uiManager = (function() {
-    function validateProject(value) {
-        if (value !== '' || value !== null) {
-            createProject(value);
+   function createProjectForm() {
+        const formModal = document.querySelector('.form-modal');
+
+        const modalFormName = document.createElement('p');
+        modalFormName.id = 'modal-form-name';
+        modalFormName.textContent = 'Add A Project';
+
+        const nameInputLabel = document.createElement('label');
+        nameInputLabel.htmlFor = 'project-name';
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.id = 'project-name';
+        nameInput.placeholder = 'Default';
+
+        nameInputLabel.appendChild(nameInput);
+
+        const submitProjectBtn = document.createElement('button');
+        submitProjectBtn.classList.add('submit-btn');
+        submitProjectBtn.id = 'submit-project';
+        submitProjectBtn.textContent = 'Add Project';
+
+        const closeProjectModalBtn = document.createElement('p');
+        closeProjectModalBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"><title>close</title><path d="M16 17H15V16H14V15H13V14H12V13H10V14H9V15H8V16H7V17H6V16H5V15H6V14H7V13H8V12H9V10H8V9H7V8H6V7H5V6H6V5H7V6H8V7H9V8H10V9H12V8H13V7H14V6H15V5H16V6H17V7H16V8H15V9H14V10H13V12H14V13H15V14H16V15H17V16H16Z" /></svg>';
+        closeProjectModalBtn.id = 'close-project-modal-btn';
+
+        if (formModal) {
+            formModal.innerHTML = '';
+            formModal.id = 'project-form-modal';
+            formModal.name = 'project-form'
+            formModal.append(modalFormName, nameInputLabel, submitProjectBtn, closeProjectModalBtn);
+            return document.forms[formModal.name];
+        }
+    }
+
+    function validateProjectForm() {
+        const projectForm = document.forms['project-form'];
+
+        if (projectForm['project-name'].value === '') {
+            projectForm['project-name'].style.border = '1px solid red';
+            return false;
+        }
+
+        createProject(projectForm['project-name'].value);
+        modalContainer.style.display = 'none';
+        console.log(allProjects)
+        return true;
+    }
+
+    function createProjectBtn(name){
+        const projectBtn = document.createElement("li");
+        projectBtn.classList.add("project");
+        let splitName = name.toLowerCase().split(' ');
+        console.log(splitName.length);
+        if (splitName.length > 1) {
+            projectBtn.classList.add(splitName[0].concat('-', splitName[1]));
+        } else if (splitName.length == 1) {
+            projectBtn.classList.add(splitName[0]);
+        }
+        projectBtn.textContent = name;
+
+        projectContainer.append(projectBtn);
+    }
+
+    function displayAllProjects() {
+        projectContainer.innerHTML = '';
+        if (allProjects.length != 0) {
+            for (let p = 0; p < allProjects.length; p++) {
+                createProjectBtn(allProjects[p].name);
+            }
         }
     }
 
@@ -54,14 +122,27 @@ const uiManager = (function() {
     }
 
     return {
-        validateProject,
+        createProjectForm,
+        validateProjectForm,
+        createProjectBtn,
+        displayAllProjects,
         displayAllTasks
     }
 })();
 
+uiManager.createProjectForm();
+
+document.querySelector('.form-modal').addEventListener('click', e => {
+    e.preventDefault();
+    if (e.target.className === 'submit-btn') {
+        uiManager.validateProjectForm();
+        uiManager.displayAllProjects();
+    }
+})
+
 popUpProject.addEventListener('click', e => {
-    let projectPromptValue = prompt('Enter Project Name: ');
-    uiManager.validateProject(projectPromptValue);
+    modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
+    uiManager.createProjectForm();
 })
 
 inboxBtn.addEventListener('click', e => {
@@ -69,6 +150,7 @@ inboxBtn.addEventListener('click', e => {
     uiManager.displayAllTasks();
 })
 
+uiManager.displayAllProjects();
 
 // function createProjectBtn(name){
 //     const projectContainer = document.querySelector(".display-projects");
