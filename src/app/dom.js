@@ -2,116 +2,73 @@ import { allTasks, createTask } from './todo';
 import { allProjects, createProject} from './project';
 
 const inboxBtn = document.querySelector('.nav-inbox');
-const todayBtn = document.querySelector('.nav-daily');
+const dailyBtn = document.querySelector('.nav-daily');
 const weeklyBtn = document.querySelector('.nav-weekly');
-const projectsContainer = document.querySelector('.projects-nav');
-const addProjectBtn = document.querySelector('.add-project');
-
+const popUpProject = document.querySelector('.add-project');
 const modalContainer = document.querySelector('.modal');
+const content = document.querySelector(".main-content");
 
-function createProjectForm() {
-    const formModal = document.querySelector('.form-modal');
-
-    const modalFormName = document.createElement('p');
-    modalFormName.id = 'modal-form-name';
-    modalFormName.textContent = 'Add A Project';
-
-    const nameInputLabel = document.createElement('label');
-    nameInputLabel.htmlFor = 'project-name';
-
-    const nameInput = document.createElement('input');
-    nameInput.type = 'text';
-    nameInput.id = 'project-name';
-    nameInput.placeholder = 'Default';
-
-    nameInputLabel.appendChild(nameInput);
-
-    const submitProjectBtn = document.createElement('button');
-    submitProjectBtn.id = 'submit-project';
-    submitProjectBtn.textContent = 'Add Project';
-
-    const closeProjectModalBtn = document.createElement('p');
-    closeProjectModalBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"><title>close</title><path d="M16 17H15V16H14V15H13V14H12V13H10V14H9V15H8V16H7V17H6V16H5V15H6V14H7V13H8V12H9V10H8V9H7V8H6V7H5V6H6V5H7V6H8V7H9V8H10V9H12V8H13V7H14V6H15V5H16V6H17V7H16V8H15V9H14V10H13V12H14V13H15V14H16V15H17V16H16Z" /></svg>';
-    closeProjectModalBtn.id = 'close-project-modal-btn';
-
-    if (formModal) {
-        formModal.innerHTML = '';
-        formModal.id = 'project-form-modal';
-        formModal.name = 'project-form'
-        formModal.append(modalFormName, nameInputLabel, submitProjectBtn, closeProjectModalBtn);
-        return document.forms[formModal.name];
-    }
-}
-
-function validateProjectForm(form) {
-    const projectFormName = form['project-name'].value;
-    if (projectFormName != '') {
-        if (allProjects.some(projects => projects.name !== projectFormName)) {
-            createProject(projectFormName);
-            return true;
-        } else {
-            return `${projectFormName} already exists`
+const uiManager = (function() {
+    function validateProject(value) {
+        if (value !== '' || value !== null) {
+            createProject(value);
         }
-    } else if (projectFormName == '') {
-        form['project-name'].style.border = '1px solid red';
     }
-}   
 
-function renderAndValidateProjectForm() {
-    let projectForm = createProjectForm();
+    function createTaskCard(task) {
+        let taskCard = document.createElement("div");
+        taskCard.className = "task-card";
 
-    const submitProjectFormBtn = projectForm['submit-project'];
-    submitProjectFormBtn.addEventListener('click', e => {
-        e.preventDefault();
-        let validationResult = validateProjectForm(projectForm);
-        if (validationResult === true) {
-            modalContainer.style.display = 'none';
-            return true;
+        let cardDetails = document.createElement("div");
+        cardDetails.className = "card-details";
+        let cardTitle = document.createElement('p');
+        cardTitle.id = "card-title";
+        cardTitle.textContent = task.title;
+        let cardDue = document.createElement('p');
+        cardDue.id = "card-due";
+        cardDue.textContent = task.due;
+        
+        cardDetails.append(cardTitle, cardDue);
+
+        let cardOptions = document.createElement("div");
+        cardOptions.className = "card-options";
+        let editBtn = document.createElement("p");
+        editBtn.id = 'edit-task';
+        editBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>note-edit</title><path d="M21 10V9L15 3H5C3.89 3 3 3.89 3 5V19C3 20.11 3.9 21 5 21H11V19.13L19.39 10.74C19.83 10.3 20.39 10.06 21 10M14 4.5L19.5 10H14V4.5M22.85 14.19L21.87 15.17L19.83 13.13L20.81 12.15C21 11.95 21.33 11.95 21.53 12.15L22.85 13.47C23.05 13.67 23.05 14 22.85 14.19M19.13 13.83L21.17 15.87L15.04 22H13V19.96L19.13 13.83Z" /></svg>';
+        let deleteBtn = document.createElement("p");
+        deleteBtn.id = 'delete-task';
+        deleteBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>'
+
+        cardOptions.append(editBtn, deleteBtn)
+
+        taskCard.append(cardDetails, cardOptions)
+        content.append(taskCard)
+    }
+
+    function displayAllTasks() {
+        if (allTasks.length != 0) {
+            for (let t = 0; t < allTasks.length; t++) {
+                createTaskCard(allTasks[t]);
+            }
         }
-    });
-    return false;
-}
-
-addProjectBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (modalContainer.style.display === 'none') {
-        modalContainer.style.display = 'flex';
-    } else if (modalContainer.style.display === 'flex') {
-        modalContainer.style.display = 'none';
     }
-    
+
+    return {
+        validateProject,
+        displayAllTasks
+    }
+})();
+
+popUpProject.addEventListener('click', e => {
+    let projectPromptValue = prompt('Enter Project Name: ');
+    uiManager.validateProject(projectPromptValue);
 })
 
-// function createTaskCard(task) {
-//     let content = document.querySelector(".content");
-//     let taskCard = document.createElement("div");
-//     taskCard.className = "task-card";
+inboxBtn.addEventListener('click', e => {
+    content.innerHTML = '';
+    uiManager.displayAllTasks();
+})
 
-//     let cardDetails = document.createElement("div");
-//     cardDetails.className = "card-details";
-//     let cardTitle = document.createElement('p');
-//     cardTitle.id = "card-title";
-//     cardTitle.textContent = task.title;
-//     let cardDue = document.createElement('p');
-//     cardDue.id = "card-due";
-//     cardDue.textContent = task.due;
-    
-//     cardDetails.append(cardTitle, cardDue);
-
-//     let cardOptions = document.createElement("div");
-//     cardOptions.className = "card-options";
-//     let editBtn = document.createElement("button");
-//     editBtn.id = 'edit-task';
-//     editBtn.textContent = 'Edit';
-//     let deleteBtn = document.createElement("button");
-//     deleteBtn.id = 'delete-task';
-//     deleteBtn.textContent = 'Delete';
-
-//     cardOptions.append(editBtn, deleteBtn)
-
-//     taskCard.append(cardDetails, cardOptions)
-//     content.append(taskCard)
-// }
 
 // function createProjectBtn(name){
 //     const projectContainer = document.querySelector(".display-projects");
