@@ -11,6 +11,7 @@ const projectContainer = document.querySelector(".projects-nav");
 
 const uiManager = (function() {
    function createProjectForm() {
+        modalContainer.id = 'project-modal';
         const formModal = document.querySelector('.form-modal');
 
         const modalFormName = document.createElement('p');
@@ -55,7 +56,6 @@ const uiManager = (function() {
 
         createProject(projectForm['project-name'].value);
         modalContainer.style.display = 'none';
-        console.log(allProjects)
         return true;
     }
 
@@ -63,7 +63,6 @@ const uiManager = (function() {
         const projectBtn = document.createElement("li");
         projectBtn.classList.add("project");
         let splitName = name.toLowerCase().split(' ');
-        console.log(splitName.length);
         if (splitName.length > 1) {
             projectBtn.classList.add(splitName[0].concat('-', splitName[1]));
         } else if (splitName.length == 1) {
@@ -113,6 +112,70 @@ const uiManager = (function() {
         content.append(taskCard)
     }
 
+    function createTaskForm() {
+        modalContainer.id = 'task-modal';
+        const taskModal = document.querySelector('.form-modal');
+        taskModal.id = 'task-form-modal';
+        taskModal.name = 'task-form';
+
+        const taskNameLabel = document.createElement('label');
+        taskNameLabel.htmlFor = 'task-name';
+        const taskNameInput = document.createElement('input');
+        taskNameInput.id = 'task-name';
+        taskNameInput.placeholder = 'To Doing The To Do';
+        
+        taskNameLabel.appendChild(taskNameInput);
+
+        const modalOptions = document.createElement('div');
+        modalOptions.id = 'modal-options';
+
+        const taskDue = document.createElement('input');
+        taskDue.type = 'date';
+        taskDue.id = 'task-due';
+        
+        const taskPriority = document.createElement("select");
+        taskPriority.id = 'task-priority';
+        let highPriority = document.createElement('option');
+        highPriority.text = 'High';
+        let mediumPriority = document.createElement('option');
+        mediumPriority.text = 'Medium';
+        let lowPriority = document.createElement('option');
+        lowPriority.text = 'Low';
+        taskPriority.options.add(highPriority, 1);
+        taskPriority.options.add(mediumPriority, 2);
+        taskPriority.options.add(lowPriority, 3);
+
+        modalOptions.append(taskDue, taskPriority);
+
+        const taskModalSubmit = document.createElement('button');
+        taskModalSubmit.classList.add('submit-btn');
+        taskModalSubmit.id = 'submit-task';
+        taskModalSubmit.textContent = 'Add Task';
+
+        const closeTaskModalBtn = document.createElement('p');
+        closeTaskModalBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"><title>close</title><path d="M16 17H15V16H14V15H13V14H12V13H10V14H9V15H8V16H7V17H6V16H5V15H6V14H7V13H8V12H9V10H8V9H7V8H6V7H5V6H6V5H7V6H8V7H9V8H10V9H12V8H13V7H14V6H15V5H16V6H17V7H16V8H15V9H14V10H13V12H14V13H15V14H16V15H17V16H16Z" /></svg>';
+        closeTaskModalBtn.id = 'close-task-modal-btn';
+
+        taskModal.append(closeTaskModalBtn, taskNameLabel, modalOptions, taskModalSubmit);
+    }
+
+    function validateTaskForm() {
+        const taskForm = document.forms['task-form'];
+        const taskName = taskForm['task-name'].value;
+        const taskDue = taskForm['task-due'].value;
+        const taskPriority = taskForm['task-priority'].value;
+
+        if (taskName != "" && taskDue != "") {
+            let newTask = createTask(
+                taskName, taskDue, taskPriority, taskProject
+            )
+            modalContainer.style.display = "none";
+            return newTask;
+        } else if (taskName == "" || taskDue == "") {
+            alert("Fill the form please")
+        }
+    }
+
     function displayAllTasks() {
         if (allTasks.length != 0) {
             for (let t = 0; t < allTasks.length; t++) {
@@ -121,22 +184,38 @@ const uiManager = (function() {
         }
     }
 
+    function displayAddTaskBtn() {
+        const addTaskBtn = document.createElement('button');
+        addTaskBtn.classList.add('add-task-btn');
+        addTaskBtn.textContent = 'Add Task';
+
+        content.appendChild(addTaskBtn);
+    }
+
     return {
         createProjectForm,
         validateProjectForm,
         createProjectBtn,
         displayAllProjects,
-        displayAllTasks
+        displayAllTasks,
+        createTaskForm,
+        validateTaskForm,
+        displayAddTaskBtn
     }
 })();
-
-uiManager.createProjectForm();
 
 document.querySelector('.form-modal').addEventListener('click', e => {
     e.preventDefault();
     if (e.target.className === 'submit-btn') {
-        uiManager.validateProjectForm();
-        uiManager.displayAllProjects();
+        if (e.target.id === 'submit-project') {
+            uiManager.validateProjectForm();
+        } else if (e.target.id === 'submit-task') {
+            uiManager.validateTaskForm();
+        }
+    }
+
+    if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
+        modalContainer.style.display = 'none';
     }
 })
 
@@ -147,38 +226,13 @@ popUpProject.addEventListener('click', e => {
 
 inboxBtn.addEventListener('click', e => {
     content.innerHTML = '';
+    uiManager.displayAddTaskBtn();
     uiManager.displayAllTasks();
 })
 
 uiManager.displayAllProjects();
 
-// function createProjectBtn(name){
-//     const projectContainer = document.querySelector(".display-projects");
-//     const projectBtn = document.createElement("button");
-//     projectBtn.className = "project";
-//     projectBtn.textContent = name;
 
-//     projectContainer.append(projectBtn);
-// }
-
-// function validateTaskForm() {
-//     let taskModal = document.querySelector(".task-modal")
-//     const taskForm = document.forms['task-form'];
-//     const taskName = taskForm['task-name'].value;
-//     const taskDue = taskForm['task-due'].value;
-//     const taskPriority = taskForm['task-priority'].value;
-//     const taskProject = taskForm['task-project'].value;
-
-//     if (taskName != "" && taskDue != "" && taskProject != "") {
-//         let newTask = createTask(
-//             taskName, taskDue, taskPriority, taskProject
-//         )
-//         taskModal.style.display = "none";
-//         return newTask;
-//     } else if (taskName == "" || taskDue == "") {
-//         alert("Fill the form please")
-//     }
-// }
 
 // function displayProjectTasks(project) {
 //     if (project.tasks.length != 0) {
