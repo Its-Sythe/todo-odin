@@ -56,18 +56,13 @@ const uiManager = (function() {
 
         createProject(projectForm['project-name'].value);
         modalContainer.style.display = 'none';
+        displayAllProjects();
         return true;
     }
 
     function createProjectBtn(name){
         const projectBtn = document.createElement("li");
         projectBtn.classList.add("project");
-        let splitName = name.toLowerCase().split(' ');
-        if (splitName.length > 1) {
-            projectBtn.classList.add(splitName[0].concat('-', splitName[1]));
-        } else if (splitName.length == 1) {
-            projectBtn.classList.add(splitName[0]);
-        }
         projectBtn.textContent = name;
 
         projectContainer.append(projectBtn);
@@ -156,7 +151,10 @@ const uiManager = (function() {
         closeTaskModalBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22"><title>close</title><path d="M16 17H15V16H14V15H13V14H12V13H10V14H9V15H8V16H7V17H6V16H5V15H6V14H7V13H8V12H9V10H8V9H7V8H6V7H5V6H6V5H7V6H8V7H9V8H10V9H12V8H13V7H14V6H15V5H16V6H17V7H16V8H15V9H14V10H13V12H14V13H15V14H16V15H17V16H16Z" /></svg>';
         closeTaskModalBtn.id = 'close-task-modal-btn';
 
-        taskModal.append(closeTaskModalBtn, taskNameLabel, modalOptions, taskModalSubmit);
+        if (taskModal) {
+            taskModal.innerHTML = '';
+            taskModal.append(closeTaskModalBtn, taskNameLabel, modalOptions, taskModalSubmit);
+        }
     }
 
     function validateTaskForm() {
@@ -166,17 +164,27 @@ const uiManager = (function() {
         const taskPriority = taskForm['task-priority'].value;
 
         if (taskName != "" && taskDue != "") {
+            let activeProject = document.getElementById('active').textContent;
             let newTask = createTask(
-                taskName, taskDue, taskPriority, taskProject
+                taskName, taskDue, taskPriority
             )
+            for (let projects in allProjects) {    
+                let currentProject = allProjects[projects];
+                if (currentProject.name === activeProject) {
+                    newTask.project = currentProject.name;
+                    currentProject.addTask(newTask);
+                    content.innerHTML = '';
+                    displayProjectTasks(currentProject.name);
+                }
+            }
             modalContainer.style.display = "none";
-            return newTask;
         } else if (taskName == "" || taskDue == "") {
             alert("Fill the form please")
         }
     }
 
     function displayAllTasks() {
+        displayAddTaskBtn();
         if (allTasks.length != 0) {
             for (let t = 0; t < allTasks.length; t++) {
                 createTaskCard(allTasks[t]);
@@ -192,6 +200,46 @@ const uiManager = (function() {
         content.appendChild(addTaskBtn);
     }
 
+    function displayProjectTasks(projectName) {
+        if (allProjects.some(projects => projects.name === projectName)) {
+            for (let projects in allProjects) {
+                let currentProject = allProjects[projects];
+                if (currentProject.name === projectName) {
+                    displayAddTaskBtn();
+                    if (currentProject.tasks.length >= 1) {
+                        for (let p = 0; p < currentProject.tasks.length; p++) {
+                            createTaskCard(currentProject.tasks[p]);    
+                        }
+                    } else if (currentProject.tasks.length == 0) {
+                        content.innerHTML = '';
+                        displayAddTaskBtn();
+                    }
+                }
+            }
+        }
+    }
+
+    function handleActiveProject(event) {
+        let tgt = event.target;
+        let parentTgt = tgt.parentNode;
+        let arrayOfChildNodes = Array.from(parentTgt.childNodes);
+        let result = arrayOfChildNodes.some(child => child.id === 'active');
+        if (tgt.className !== 'project') {
+            return false;
+        } 
+
+        if (result === false) {
+            displayProjectTasks(tgt.textContent);
+            return tgt.id = 'active';
+        } else if (result === true) {
+            let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
+            arrayOfChildNodes[activeProject].id = 'inactive';
+            displayProjectTasks(tgt.textContent)
+            return tgt.id = 'active';
+        }
+    }
+
+
     return {
         createProjectForm,
         validateProjectForm,
@@ -200,7 +248,9 @@ const uiManager = (function() {
         displayAllTasks,
         createTaskForm,
         validateTaskForm,
-        displayAddTaskBtn
+        displayAddTaskBtn,
+        displayProjectTasks,
+        handleActiveProject
     }
 })();
 
@@ -211,6 +261,7 @@ document.querySelector('.form-modal').addEventListener('click', e => {
             uiManager.validateProjectForm();
         } else if (e.target.id === 'submit-task') {
             uiManager.validateTaskForm();
+            console.log(allProjects)
         }
     }
 
@@ -226,13 +277,23 @@ popUpProject.addEventListener('click', e => {
 
 inboxBtn.addEventListener('click', e => {
     content.innerHTML = '';
-    uiManager.displayAddTaskBtn();
     uiManager.displayAllTasks();
+})
+
+projectContainer.addEventListener('click', e => {
+    content.innerHTML = '';
+    uiManager.handleActiveProject(e);
 })
 
 uiManager.displayAllProjects();
 
-
+document.querySelector('.main-content').addEventListener('click', e => {
+    e.preventDefault();
+    if (e.target.className === 'add-task-btn') {
+         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
+        uiManager.createTaskForm();
+    }
+})
 
 // function displayProjectTasks(project) {
 //     if (project.tasks.length != 0) {
@@ -243,23 +304,6 @@ uiManager.displayAllProjects();
 //     }
 // }
 
-// function handleActiveProject(event) {
-//     let tgt = event.target;
-//     let parentTgt = tgt.parentNode;
-//     let arrayOfChildNodes = Array.from(parentTgt.childNodes);
-//     let result = arrayOfChildNodes.some(child => child.id === 'active');
-//     if (tgt.className !== 'project') {
-//         return false;
-//     } 
-
-//     if (result === false) {
-//         return tgt.id = 'active';
-//     } else if (result === true) {
-//         let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
-//         arrayOfChildNodes[activeProject].id = 'inactive';
-//         return tgt.id = 'active';
-//     }
-// }
 
 // function handleAddTaskToActivePorject(project, task) {
 //     if (project.tasks.some(projectTask => projectTask.title !== task.title)) {
