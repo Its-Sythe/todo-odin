@@ -140,10 +140,13 @@ const uiManager = (function() {
         taskPriority.id = 'task-priority';
         let highPriority = document.createElement('option');
         highPriority.text = 'High';
+        highPriority.style.backgroundColor = 'rgb(255, 50, 100)';
         let mediumPriority = document.createElement('option');
         mediumPriority.text = 'Medium';
+        mediumPriority.style.backgroundColor = 'rgb(50, 150, 255)';
         let lowPriority = document.createElement('option');
         lowPriority.text = 'Low';
+        lowPriority.style.backgroundColor = 'rgb(50, 255, 100)';
         taskPriority.options.add(highPriority, 1);
         taskPriority.options.add(mediumPriority, 2);
         taskPriority.options.add(lowPriority, 3);
@@ -172,17 +175,20 @@ const uiManager = (function() {
         const taskPriority = taskForm['task-priority'].value;
 
         if (taskName != "" && taskDue != "") {
-            let activeProject = document.getElementById('active').textContent;
+            let activeEle = document.getElementById('active');
             let newTask = createTask(
                 taskName, taskDue, taskPriority
             )
-            for (let projects in allProjects) {    
-                let currentProject = allProjects[projects];
-                if (currentProject.name === activeProject) {
-                    newTask.project = currentProject.name;
-                    currentProject.addTask(newTask);
-                    content.innerHTML = '';
-                    displayProjectTasks(currentProject.name);
+            if (activeEle !== null) {
+                let activeProject = activeEle.textContent;
+                for (let projects in allProjects) {    
+                    let currentProject = allProjects[projects];
+                    if (currentProject.name === activeProject) {
+                        newTask.project = currentProject.name;
+                        currentProject.addTask(newTask);
+                        content.innerHTML = '';
+                        displayProjectTasks(currentProject.name);
+                    }
                 }
             }
             modalContainer.style.display = "none";
