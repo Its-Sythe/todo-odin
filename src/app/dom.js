@@ -101,6 +101,14 @@ const uiManager = (function() {
         deleteBtn.id = 'delete-task';
         deleteBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z" /></svg>'
 
+        if (task.priority === 'High') {
+            taskCard.style.boxShadow = '0px 0px 20px 0px rgb(255, 50, 100)';
+        } else if (task.priority === 'Medium') {
+            taskCard.style.boxShadow = '0px 0px 20px 0px rgb(50, 100, 205)';
+        } else if (task.priority === 'Low') {
+            taskCard.style.boxShadow = '0px 0px 20px 0px rgb(100, 255, 100)';
+        }
+        
         cardOptions.append(editBtn, deleteBtn)
 
         taskCard.append(cardDetails, cardOptions)
@@ -184,6 +192,7 @@ const uiManager = (function() {
     }
 
     function displayAllTasks() {
+        content.innerHTML = '';
         displayAddTaskBtn();
         if (allTasks.length != 0) {
             for (let t = 0; t < allTasks.length; t++) {
@@ -261,7 +270,6 @@ document.querySelector('.form-modal').addEventListener('click', e => {
             uiManager.validateProjectForm();
         } else if (e.target.id === 'submit-task') {
             uiManager.validateTaskForm();
-            console.log(allProjects)
         }
     }
 
@@ -290,7 +298,7 @@ uiManager.displayAllProjects();
 document.querySelector('.main-content').addEventListener('click', e => {
     e.preventDefault();
     if (e.target.className === 'add-task-btn') {
-         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
+        modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
         uiManager.createTaskForm();
     }
 })
