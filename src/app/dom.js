@@ -48,7 +48,6 @@ const uiManager = (function() {
 
     function validateProjectForm() {
         const projectForm = document.forms['project-form'];
-
         if (projectForm['project-name'].value === '') {
             projectForm['project-name'].style.border = '1px solid red';
             return false;
@@ -190,11 +189,15 @@ const uiManager = (function() {
                         displayProjectTasks(currentProject.name);
                     }
                 }
+                if (activeEle.className === 'nav-inbox') {
+                    content.innerHTML = '';
+                    displayAllTasks();
+                }
             }
             modalContainer.style.display = "none";
         } else if (taskName == "" || taskDue == "") {
             alert("Fill the form please")
-        }
+        } 
     }
 
     function displayAllTasks() {
@@ -244,13 +247,27 @@ const uiManager = (function() {
         } 
 
         if (result === false) {
+            inboxBtn.id = 'inactive';
             displayProjectTasks(tgt.textContent);
             return tgt.id = 'active';
         } else if (result === true) {
+            inboxBtn.id = 'inactive';
             let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
             arrayOfChildNodes[activeProject].id = 'inactive';
             displayProjectTasks(tgt.textContent)
             return tgt.id = 'active';
+        }
+    }
+
+    function handleInboxActive() {
+        let childArray = Array.from(projectContainer.childNodes);
+        if (childArray.length != 0) {
+            if (childArray.some(children => children.id !== 'active')) {
+                inboxBtn.id = 'active';
+            } else if (childArray.some(children => children.id === 'active') && inboxBtn.id === 'active') {
+                let activeProject = childArray.findIndex(children => children.id === 'active');
+                childArray[activeProject].id = 'inactive';
+            }
         }
     }
 
@@ -265,7 +282,8 @@ const uiManager = (function() {
         validateTaskForm,
         displayAddTaskBtn,
         displayProjectTasks,
-        handleActiveProject
+        handleActiveProject,
+        handleInboxActive
     }
 })();
 
@@ -291,12 +309,15 @@ popUpProject.addEventListener('click', e => {
 
 inboxBtn.addEventListener('click', e => {
     content.innerHTML = '';
+    inboxBtn.id = 'active';
     uiManager.displayAllTasks();
+    uiManager.handleInboxActive();
 })
 
 projectContainer.addEventListener('click', e => {
     content.innerHTML = '';
     uiManager.handleActiveProject(e);
+    uiManager.handleInboxActive();
 })
 
 uiManager.displayAllProjects();
@@ -306,6 +327,7 @@ document.querySelector('.main-content').addEventListener('click', e => {
     if (e.target.className === 'add-task-btn') {
         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
         uiManager.createTaskForm();
+
     }
 })
 
