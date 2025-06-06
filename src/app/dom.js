@@ -271,6 +271,18 @@ const uiManager = (function() {
         }
     }
 
+    function handleToday() {
+        // TO-DO
+    }
+
+    function editTask() {
+        // TO-DO
+    }
+
+    function deletTask() {
+        // TO-DO
+    }
+
 
     return {
         createProjectForm,
@@ -326,7 +338,6 @@ document.querySelector('.main-content').addEventListener('click', e => {
     if (e.target.className === 'add-task-btn') {
         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
         uiManager.createTaskForm();
-
     }
 })
 
