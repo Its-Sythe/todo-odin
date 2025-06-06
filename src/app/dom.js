@@ -317,7 +317,6 @@ inboxBtn.addEventListener('click', e => {
 projectContainer.addEventListener('click', e => {
     content.innerHTML = '';
     uiManager.handleActiveProject(e);
-    uiManager.handleInboxActive();
 })
 
 uiManager.displayAllProjects();
