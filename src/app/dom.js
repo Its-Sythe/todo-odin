@@ -348,6 +348,9 @@ inboxBtn.addEventListener('click', e => {
 })
 
 projectContainer.addEventListener('click', e => {
+    if (e.target.className === 'projects-nav') {
+        return;
+    }
     content.innerHTML = '';
     uiManager.handleActiveProject(e);
 })
