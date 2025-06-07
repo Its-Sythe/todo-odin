@@ -1,5 +1,6 @@
 import { allTasks, createTask } from './todo';
 import { allProjects, createProject} from './project';
+import { format } from 'date-fns';
 
 const inboxBtn = document.querySelector('.nav-inbox');
 const dailyBtn = document.querySelector('.nav-daily');
@@ -271,8 +272,27 @@ const uiManager = (function() {
         }
     }
 
-    function handleToday() {
-        // TO-DO
+    function handleToday(date) {
+        let tdy = format(date, "yyyy-MM-dd");
+        content.innerHTML = '';
+        if (allTasks.some(tasks => tasks.due === tdy)) {
+            let dailyTasks = allTasks.filter((tasks) => tasks.due == tdy);
+            console.log(dailyTasks);
+            if (dailyTasks.length > 1) {
+                for (let t = 0; t < dailyTasks.length; t++) {
+                    createTaskCard(dailyTasks[t]);
+                }
+            } else if (dailyTasks.length <= 1) {
+                createTaskCard(dailyTasks[0]);
+            }
+        }  else {
+            let tasksText = document.createElement('p')
+            tasksText.textContent = 'No tasks for the day';
+            tasksText.id = 'no-tasks';
+            content.append(tasksText);
+            console.log(tasksText);
+        }
+
     }
 
     function editTask() {
@@ -295,7 +315,8 @@ const uiManager = (function() {
         displayAddTaskBtn,
         displayProjectTasks,
         handleActiveProject,
-        handleInboxActive
+        handleInboxActive,
+        handleToday
     }
 })();
 
@@ -339,6 +360,10 @@ document.querySelector('.main-content').addEventListener('click', e => {
         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
         uiManager.createTaskForm();
     }
+})
+
+dailyBtn.addEventListener('click', e => {
+    uiManager.handleToday(new Date());
 })
 
 // function displayProjectTasks(project) {
