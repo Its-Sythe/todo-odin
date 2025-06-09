@@ -295,12 +295,22 @@ const uiManager = (function() {
 
     }
 
-    function editTask() {
-        // TO-DO
+    function editTask(target) {
+        let taskToEdit = allTasks.find((tasks) => tasks.title === target);
+        if (taskToEdit) {
+            // TO-DO
+        }
     }
 
-    function deletTask() {
-        // TO-DO
+    function deleteTask(target) {
+       let targetTask = allTasks.find((tasks) => tasks.title === target.textContent);
+       if (targetTask) {
+        let targetIndex = allTasks.findIndex((tasks) => tasks.title === target.textContent);
+        allTasks.splice(targetIndex, 1);
+        let tgtContainer = target.closest('.task-card');
+        document.querySelector('.main-content').removeChild(tgtContainer);
+        console.log(allTasks);
+       } 
     }
 
 
@@ -316,7 +326,8 @@ const uiManager = (function() {
         displayProjectTasks,
         handleActiveProject,
         handleInboxActive,
-        handleToday
+        handleToday,
+        deleteTask
     }
 })();
 
@@ -362,6 +373,15 @@ document.querySelector('.main-content').addEventListener('click', e => {
     if (e.target.className === 'add-task-btn') {
         modalContainer.style.display == 'none' ? modalContainer.style.display = 'flex' : modalContainer.style.display = 'none';
         uiManager.createTaskForm();
+    }
+    
+    if(e.target.tagName === 'path') {
+        let callingBtn = e.target.closest('p').id;
+        let expectedTarget = e.target.closest('.task-card');
+        let target = expectedTarget.querySelector('#card-title');
+        if (callingBtn === 'delete-task') {
+            uiManager.deleteTask(target);
+        }
     }
 })
 
