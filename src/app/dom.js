@@ -290,7 +290,6 @@ const uiManager = (function() {
             tasksText.textContent = 'No tasks for the day';
             tasksText.id = 'no-tasks';
             content.append(tasksText);
-            console.log(tasksText);
         }
 
     }
@@ -304,9 +303,11 @@ const uiManager = (function() {
 
     function deleteTask(target) {
        let targetTask = allTasks.find((tasks) => tasks.title === target.textContent);
+       let targetTaskProject = allProjects.find((projects) => projects.name === targetTask.project);
        if (targetTask) {
         let targetIndex = allTasks.findIndex((tasks) => tasks.title === target.textContent);
         allTasks.splice(targetIndex, 1);
+        targetTaskProject.deleteTask(targetTask);
         let tgtContainer = target.closest('.task-card');
         document.querySelector('.main-content').removeChild(tgtContainer);
         console.log(allTasks);
