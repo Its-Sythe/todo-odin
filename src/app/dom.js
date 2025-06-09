@@ -389,32 +389,3 @@ dailyBtn.addEventListener('click', e => {
     uiManager.handleToday(new Date());
 })
 
-// function displayProjectTasks(project) {
-//     if (project.tasks.length != 0) {
-//         for (let p = 0; p < project.tasks.length; p++) {
-//             let currentTaskCard = createTaskCard(project.tasks[p]);
-//             return currentTaskCard;
-//         }
-//     }
-// }
-
-
-// function handleAddTaskToActivePorject(project, task) {
-//     if (project.tasks.some(projectTask => projectTask.title !== task.title)) {
-//         project.tasks.push(task);
-//         return;
-//     } else if (project.tasks.some(projectTask => projectTask.title) === task.title) {
-//         return `${task} already exists`
-//     }
-// }
-
-// const addTaskBtn = document.querySelector(".add-task");
-// addTaskBtn.addEventListener("click", displayTaskModal);
-
-
-// const submitTaskBtn = document.getElementById("submit-task");
-// submitTaskBtn.addEventListener("click", (event) => {
-//     event.preventDefault();
-//     const task = validateTaskForm();
-//     createTaskCard(task);
-// });
