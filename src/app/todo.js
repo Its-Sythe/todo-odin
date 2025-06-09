@@ -1,14 +1,7 @@
 // This file will be handling the creation of todos
 // and the extra logic related to todos
 
-let allTasks = [
-    {
-        title: 'Hello',
-        due: '2025-05-10',
-        priority: 'Low',
-        project: 'Default'
-    }
-];
+let allTasks = [];
 
 function createTask(title, due, priority, project) {
     let task = {

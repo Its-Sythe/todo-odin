@@ -192,6 +192,7 @@ const uiManager = (function() {
                 }
                 if (activeEle.className === 'nav-inbox') {
                     content.innerHTML = '';
+                    newTask.project = 'inbox-task';
                     displayAllTasks();
                 }
             }
@@ -302,16 +303,22 @@ const uiManager = (function() {
     }
 
     function deleteTask(target) {
-       let targetTask = allTasks.find((tasks) => tasks.title === target.textContent);
-       let targetTaskProject = allProjects.find((projects) => projects.name === targetTask.project);
-       if (targetTask) {
-        let targetIndex = allTasks.findIndex((tasks) => tasks.title === target.textContent);
-        allTasks.splice(targetIndex, 1);
-        targetTaskProject.deleteTask(targetTask);
-        let tgtContainer = target.closest('.task-card');
-        document.querySelector('.main-content').removeChild(tgtContainer);
-        console.log(allTasks);
-       } 
+        let targetTask = allTasks.find((tasks) => tasks.title === target.textContent);
+        let targetTaskProject = allProjects.find((projects) => projects.name === targetTask.project);
+        console.log(targetTask)
+        if (targetTask && targetTaskProject) {
+            let targetIndex = allTasks.findIndex((tasks) => tasks.title === target.textContent);
+            allTasks.splice(targetIndex, 1);
+            targetTaskProject.deleteTask(targetTask);
+            let tgtContainer = target.closest('.task-card');
+            document.querySelector('.main-content').removeChild(tgtContainer);
+            console.log(allTasks);
+        } else if (targetTask.project === 'inbox-task') {
+            let targetIndex = allTasks.findIndex((tasks) => tasks.title === target.textContent);
+            allTasks.splice(targetIndex, 1);
+            let tgtContainer = target.closest('.task-card');
+            document.querySelector('.main-content').removeChild(tgtContainer);
+        }
     }
 
 
