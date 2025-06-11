@@ -1,6 +1,17 @@
-import { allTasks } from './todo';
-import { allProjects } from './project'
+import { allProjects } from "./project";
+import { allTasks } from "./todo"
 
-localStorage.setItem('tasks', allTasks);
+export const storageManager = (function() {
+    function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(allTasks));
+    }
 
-localStorage.setItem('projects', allProjects)
+    function saveProjects() {
+        localStorage.setItem("projects", JSON.stringify(allProjects));
+    }
+
+    return {
+        saveTasks,
+        saveProjects
+    }
+})();

@@ -1,7 +1,9 @@
 // This will handle the creation of projects
 // And their manipulation
 
-let allProjects = [];
+import { storageManager } from "./storage";
+
+let allProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
 function createProject(name) {
     let project = {
@@ -51,12 +53,14 @@ function createProject(name) {
     if (allProjects.length != 0) {
         if (allProjects.some(projects => projects.name !== project.name)) {
             allProjects.push(project);
+            storageManager.saveProjects()
             return project;
         } else {
             return false;
         }
     }
     allProjects.push(project);
+    storageManager.saveProjects();
     return project;
 }
 

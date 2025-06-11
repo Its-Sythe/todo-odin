@@ -1,6 +1,7 @@
 import { allTasks, createTask } from './todo';
 import { allProjects, createProject} from './project';
 import { format } from 'date-fns';
+import { storageManager } from './storage';
 
 const inboxBtn = document.querySelector('.nav-inbox');
 const dailyBtn = document.querySelector('.nav-daily');
