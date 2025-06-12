@@ -18,6 +18,7 @@ function createProject(name) {
             if (project.tasks.some(tasks => tasks.title !== task.title)) {
                 project.tasks.push(task);
                 task.project = project.name;
+                storageManager.saveProjects();
                 return project;
             } else {
                 return 'O_o Wut?'
@@ -25,6 +26,8 @@ function createProject(name) {
         }
         project.tasks.push(task);
         task.project = project.name;
+        storageManager.saveProjects();
+        console.log(project);
         return project;
     }
 
@@ -53,15 +56,12 @@ function createProject(name) {
     if (allProjects.length != 0) {
         if (allProjects.some(projects => projects.name !== project.name)) {
             allProjects.push(project);
-            storageManager.saveProjects()
-	    console.log(project);
             return project;
         } else {
             return false;
         }
     }
     allProjects.push(project);
-    storageManager.saveProjects();
     console.log(project);
     return project;
 }
