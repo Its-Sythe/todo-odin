@@ -54,6 +54,7 @@ function createProject(name) {
         if (allProjects.some(projects => projects.name !== project.name)) {
             allProjects.push(project);
             storageManager.saveProjects()
+	    console.log(project);
             return project;
         } else {
             return false;
@@ -61,6 +62,7 @@ function createProject(name) {
     }
     allProjects.push(project);
     storageManager.saveProjects();
+    console.log(project);
     return project;
 }
 

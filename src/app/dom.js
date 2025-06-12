@@ -173,7 +173,7 @@ const uiManager = (function() {
         const taskForm = document.forms['task-form'];
         const taskName = taskForm['task-name'].value;
         const taskDue = taskForm['task-due'].value;
-        const taskPriority = taskForm['task-priority'].value;
+	const taskPriority = taskForm['task-priority'].value;
 
         if (taskName != "" && taskDue != "") {
             let activeEle = document.getElementById('active');
@@ -187,6 +187,7 @@ const uiManager = (function() {
                     if (currentProject.name === activeProject) {
                         newTask.project = currentProject.name;
                         currentProject.addTask(newTask);
+			console.log(currentProject)
                         content.innerHTML = '';
                         displayProjectTasks(currentProject.name);
                     }
@@ -258,6 +259,7 @@ const uiManager = (function() {
             let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
             arrayOfChildNodes[activeProject].id = 'inactive';
             displayProjectTasks(tgt.textContent)
+	    console.log(allProjects);
             return tgt.id = 'active';
         }
     }

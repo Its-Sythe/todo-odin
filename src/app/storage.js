@@ -10,6 +10,9 @@ export const storageManager = (function() {
         localStorage.setItem("projects", JSON.stringify(allProjects));
     }
 
+    function saveProjectTasks() {
+   	if(allProjects) 
+    }
     return {
         saveTasks,
         saveProjects
