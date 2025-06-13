@@ -3,7 +3,9 @@
 
 import { storageManager } from "./storage";
 
-let allProjects = JSON.parse(localStorage.getItem("projects")) || [];
+let savedProjects = JSON.parse(localStorage.getItem("projects"));
+
+let allProjects = [];
 
 function createProject(name) {
     let project = {
@@ -50,6 +52,15 @@ function createProject(name) {
             return allProjects;
         } else {
             return 'O_o'
+        }
+    }
+   
+    if (savedProjects) {
+        for (let i = 0; i < savedProjects.length; i++) {
+            if (!allProjects.some(projects => projects.name !== savedProjects[i].name)) {
+                allProjects.push(savedProjects[i]);
+                console.log(allProjects);
+            }
         }
     }
 
