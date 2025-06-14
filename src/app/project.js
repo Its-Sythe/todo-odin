@@ -64,6 +64,8 @@ function createProject(name) {
         }
     }
 
+    console.log(allProjects);
+
     if (allProjects.length != 0) {
         if (allProjects.some(projects => projects.name !== project.name)) {
             allProjects.push(project);
