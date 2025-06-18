@@ -3,16 +3,13 @@
 
 import { storageManager } from "./storage";
 
-let savedProjects = JSON.parse(localStorage.getItem("projects"));
+export let allProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
-let allProjects = [];
-
-function createProject(name) {
+export const projectManager = function() {
     let project = {
         name,
         tasks: []
     };
-
     const projectProto = Object.getPrototypeOf(project);
 
     projectProto.addTask = function(task) {
@@ -54,29 +51,32 @@ function createProject(name) {
             return 'O_o'
         }
     }
-   
-    if (savedProjects) {
-        for (let i = 0; i < savedProjects.length; i++) {
-            if (!allProjects.some(projects => projects.name !== savedProjects[i].name)) {
-                allProjects.push(savedProjects[i]);
-                console.log(allProjects);
+
+    function createProject(name) {
+        if (allProjects.length != 0) {
+            if (allProjects.some(projects => projects.name !== project.name)) {
+                allProjects.push(project);
+                return project;
+            } else {
+                return false;
+            }
+        }
+        allProjects.push(project);
+        console.log(project);
+        return project;
+    }
+
+    function fixLoadedProjects() {
+        if(allProjects.length != 0) {
+            for (let i = 0; i < allProjects.length; i++) {
+                let loadedProject = Object.getPrototypeOf(allProjects[i]);
+                Object.assign(loadedProject, projectProto)
             }
         }
     }
 
-    console.log(allProjects);
-
-    if (allProjects.length != 0) {
-        if (allProjects.some(projects => projects.name !== project.name)) {
-            allProjects.push(project);
-            return project;
-        } else {
-            return false;
-        }
+    return {
+        createProject,
+        fixLoadedProjects
     }
-    allProjects.push(project);
-    console.log(project);
-    return project;
-}
-
-export { allProjects, createProject }
+}();

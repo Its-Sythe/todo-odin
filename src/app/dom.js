@@ -1,5 +1,5 @@
 import { allTasks, createTask } from './todo';
-import { allProjects, createProject} from './project';
+import { allProjects, projectManager} from './project';
 import { format } from 'date-fns';
 import { storageManager } from './storage';
 
@@ -55,7 +55,7 @@ const uiManager = (function() {
             return false;
         }
 
-        createProject(projectForm['project-name'].value);
+        projectManager.createProject(projectForm['project-name'].value);
         modalContainer.style.display = 'none';
         displayAllProjects();
         return true;
@@ -187,9 +187,10 @@ const uiManager = (function() {
                     if (currentProject.name === activeProject) {
                         newTask.project = currentProject.name;
                         currentProject.addTask(newTask);
-			console.log(currentProject)
                         content.innerHTML = '';
                         displayProjectTasks(currentProject.name);
+                        storageManager.saveProjects();
+                        storageManager.saveTasks();
                     }
                 }
                 if (activeEle.className === 'nav-inbox') {
@@ -259,7 +260,6 @@ const uiManager = (function() {
             let activeProject = arrayOfChildNodes.findIndex((child) => child.id == 'active');
             arrayOfChildNodes[activeProject].id = 'inactive';
             displayProjectTasks(tgt.textContent)
-	    console.log(allProjects);
             return tgt.id = 'active';
         }
     }
@@ -375,6 +375,7 @@ projectContainer.addEventListener('click', e => {
     }
     content.innerHTML = '';
     uiManager.handleActiveProject(e);
+    console.log(allProjects[0])
 })
 
 uiManager.displayAllProjects();
@@ -398,5 +399,7 @@ document.querySelector('.main-content').addEventListener('click', e => {
 
 dailyBtn.addEventListener('click', e => {
     uiManager.handleToday(new Date());
+    console.log(allProjects);
 })
 
+projectManager.fixLoadedProjects()
