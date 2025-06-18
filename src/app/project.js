@@ -5,78 +5,77 @@ import { storageManager } from "./storage";
 
 export let allProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
-export const projectManager = function() {
-    let project = {
-        name,
-        tasks: []
-    };
-    const projectProto = Object.getPrototypeOf(project);
+let project = {
+    name: "",
+    tasks: []
+};
+const projectProto = Object.getPrototypeOf(project);
 
-    projectProto.addTask = function(task) {
-        if (project.tasks.length != 0) {
-            if (project.tasks.some(tasks => tasks.title !== task.title)) {
-                project.tasks.push(task);
-                task.project = project.name;
-                storageManager.saveProjects();
-                return project;
-            } else {
-                return 'O_o Wut?'
-            }
-        }
-        project.tasks.push(task);
-        task.project = project.name;
-        storageManager.saveProjects();
-        console.log(project);
-        return project;
-    }
-
-    projectProto.deleteTask = function(task) {
-        if (project.tasks.some(tasks => tasks.title === task.title)) {
-            project.tasks.splice(project.tasks.indexOf(task), 1);
+projectProto.addTask = function(task) {
+    if (project.tasks.length != 0) {
+        if (project.tasks.some(tasks => tasks.title !== task.title)) {
+            project.tasks.push(task);
+            task.project = project.name;
+            storageManager.saveProjects();
             return project;
         } else {
-            return 'O_o wut?'
+            return 'O_o Wut?'
         }
     }
+    project.tasks.push(task);
+    task.project = project.name;
+    storageManager.saveProjects();
+    console.log(project);
+    return project;
+}
 
-    projectProto.editProject = function(change) {
-        return project.name = change;
-    }
-    
-    projectProto.deleteProject = function(project) {
-        if (allProjects.some(projects => projects.name === project.name)) {
-            allProjects.splice(allProjects.indexOf(project), 1);
-            return allProjects;
-        } else {
-            return 'O_o'
-        }
-    }
-
-    function createProject(name) {
-        if (allProjects.length != 0) {
-            if (allProjects.some(projects => projects.name !== project.name)) {
-                allProjects.push(project);
-                return project;
-            } else {
-                return false;
-            }
-        }
-        allProjects.push(project);
-        console.log(project);
+projectProto.deleteTask = function(task) {
+    if (project.tasks.some(tasks => tasks.title === task.title)) {
+        project.tasks.splice(project.tasks.indexOf(task), 1);
         return project;
+    } else {
+        return 'O_o wut?'
     }
+}
 
-    function fixLoadedProjects() {
-        if(allProjects.length != 0) {
-            for (let i = 0; i < allProjects.length; i++) {
-                let loadedProject = Object.getPrototypeOf(allProjects[i]);
-                Object.assign(loadedProject, projectProto)
-            }
+projectProto.editProject = function(change) {
+    return project.name = change;
+}
+
+projectProto.deleteProject = function(project) {
+    if (allProjects.some(projects => projects.name === project.name)) {
+        allProjects.splice(allProjects.indexOf(project), 1);
+        return allProjects;
+    } else {
+        return 'O_o'
+    }
+}
+
+function createProject(name) {
+    project = {
+        name,
+        tasks: []
+    }
+    if (allProjects.length != 0) {
+        if (allProjects.some(projects => projects.name !== project.name)) {
+            allProjects.push(project);
+            return project;
+        } else {
+            return false;
         }
     }
+    allProjects.push(project);
+    console.log(project);
+    return project;
+}
 
-    return {
-        createProject,
-        fixLoadedProjects
+function fixLoadedProjects() {
+    if(allProjects.length != 0) {
+        for (let i = 0; i < allProjects.length; i++) {
+            let loadedProject = Object.getPrototypeOf(allProjects[i]);
+            Object.assign(loadedProject, projectProto)
+        }
     }
-}();
+}
+
+export { createProject, fixLoadedProjects }

@@ -1,5 +1,5 @@
 import { allTasks, createTask } from './todo';
-import { allProjects, projectManager} from './project';
+import { allProjects, createProject, fixLoadedProjects} from './project';
 import { format } from 'date-fns';
 import { storageManager } from './storage';
 
@@ -55,7 +55,7 @@ const uiManager = (function() {
             return false;
         }
 
-        projectManager.createProject(projectForm['project-name'].value);
+        createProject(projectForm['project-name'].value);
         modalContainer.style.display = 'none';
         displayAllProjects();
         return true;
@@ -173,7 +173,7 @@ const uiManager = (function() {
         const taskForm = document.forms['task-form'];
         const taskName = taskForm['task-name'].value;
         const taskDue = taskForm['task-due'].value;
-	const taskPriority = taskForm['task-priority'].value;
+	    const taskPriority = taskForm['task-priority'].value;
 
         if (taskName != "" && taskDue != "") {
             let activeEle = document.getElementById('active');
@@ -182,9 +182,10 @@ const uiManager = (function() {
             )
             if (activeEle !== null) {
                 let activeProject = activeEle.textContent;
-                for (let projects in allProjects) {    
-                    let currentProject = allProjects[projects];
+                for (let i = 0; i < allProjects.length; i++) {    
+                    let currentProject = allProjects[i];
                     if (currentProject.name === activeProject) {
+                        console.log(currentProject)
                         newTask.project = currentProject.name;
                         currentProject.addTask(newTask);
                         content.innerHTML = '';
@@ -401,5 +402,4 @@ dailyBtn.addEventListener('click', e => {
     uiManager.handleToday(new Date());
     console.log(allProjects);
 })
-
-projectManager.fixLoadedProjects()
+fixLoadedProjects()
