@@ -2,11 +2,13 @@
 ### To Do Project For The Odin Project.
 
 #### You can access the live page here [時Toki](https://its-sythe.github.io/todo-odin/).
+j
 
 --- Project is still under development since I have yet to fix an issue with
 --- Local storage and some features that are not yet implemented.
 
 Current Features:
+--------------------------------------------------
     1. Adding a project to hold your todos.
 --------------------------------------------------
     2. Adding tasks to a project
