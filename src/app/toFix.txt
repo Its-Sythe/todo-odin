@@ -1,9 +1,0 @@
-1. Need to fix the delete feature for the tasks.
-2. Need to add the edit feature for tasks.
-3. Need to add a edit feature and delete feature to projects.
-4. Need to fix the local storage issue with object prototypes.
-5. Need to fix the issue with loading of saved projects on load.
-
-
-Possible priority:
-5 > 4 > 1 > 2,3
