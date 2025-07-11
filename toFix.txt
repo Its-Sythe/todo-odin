@@ -1,3 +1,0 @@
-What needs fixing:
- 1. All the stuff that are stated in the read me.
- 2. Need to add a drop down format to the task card edit and deletion mechanism.
