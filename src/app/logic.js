@@ -32,6 +32,12 @@ export class Todo {
         this.projects.push(new Project("Upcoming"));
     }
 
+    addProject(project) {
+        if (this.containsProject(project.name)) return;
+
+        this.projects.push(project)
+    }
+
     getProjects() {
         return this.projects;
     }
