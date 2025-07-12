@@ -48,6 +48,12 @@ export const ui =(function() {
         document.querySelector(".form-modal").addEventListener("click", (e) => {
             e.preventDefault();
             let tgt = e.target;
+            if (tgt.id == "submit-project") {
+                         
+            } 
+            if (tgt.id == "submit-task") {
+                validateForm("task")       
+            }
         })
     }
 
@@ -82,9 +88,10 @@ export const ui =(function() {
 
             const taskDue = document.createElement("input");
             taskDue.type = "date";
+            taskDue.id = "task-form-due"
 
             const taskPriority = document.createElement("select");
-            taskPriority.id = 'task-priority';
+            taskPriority.id = 'task-form-priority';
 
             let highPriority = document.createElement('option');
             highPriority.text = 'High';
@@ -136,6 +143,16 @@ export const ui =(function() {
             formModal.append(projectName, optionsContainer)
         }
     } 
+
+    function validateForm(type) {
+        if (type == "task") {
+            const taskName = document.forms["modal"]["task-form-name"]
+            const taskDue = document.forms["modal"]["task-form-due"];
+            const taskPriority = document.forms["modal"]["task-form-priority"]
+        } else if(type == "project") {
+            
+        }
+    }
 
     function renderDefaultProjects(defaults) {
         const defaultsContainer = document.querySelector(".default-projects");
