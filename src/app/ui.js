@@ -32,27 +32,25 @@ export const ui =(function() {
             if (tgt.className = "add-project" && !(tgt.textContent == "Inbox" || tgt.textContent == "Today" || tgt.textContent == "Upcoming")) {
                 createForm("project");
             } 
-
-
         })
 
         document.querySelector(".main-content").addEventListener("click", (e) => {
             let tgt = e.target;
-            e.preventDefault();
-
             if (tgt.className = "add-task") {
                 createForm("task");
             }
         })
 
         document.querySelector(".form-modal").addEventListener("click", (e) => {
-            e.preventDefault();
             let tgt = e.target;
             if (tgt.id == "submit-project") {
-                         
+                let result = validateForm("project");
+                if (result != undefined || result != null) {
+                    todo.addProject(result);
+                }
             } 
             if (tgt.id == "submit-task") {
-                validateForm("task")       
+                let result = validateForm("task");
             }
         })
     }
@@ -85,10 +83,12 @@ export const ui =(function() {
             const taskName = document.createElement("input");
             taskName.type = "text";
             taskName.id = "task-form-name";
+            taskName.required = true;
 
             const taskDue = document.createElement("input");
             taskDue.type = "date";
             taskDue.id = "task-form-due"
+            taskDue.required = true;
 
             const taskPriority = document.createElement("select");
             taskPriority.id = 'task-form-priority';
@@ -126,6 +126,7 @@ export const ui =(function() {
 
             const projectName = document.createElement("input");
             projectName.id = "project-form-name";
+            projectName.required = true;
 
             const optionsContainer = document.createElement("div");
             optionsContainer.id = "options-container"
@@ -145,12 +146,34 @@ export const ui =(function() {
     } 
 
     function validateForm(type) {
+        const formModal = document.querySelector(".form-modal");
+        if (type == "project") {
+            const projectName = document.getElementById("project-form-name");
+            if (projectName.value == '' || projectName.value == null) {
+                projectName.setCustomValidity("Please enter a project name ;p")
+            } else {
+                let newProject = new Project(projectName.value)
+                formModal.style.display = "none"
+                console.log(newProject)
+                return newProject;
+            }
+        }    
         if (type == "task") {
-            const taskName = document.forms["modal"]["task-form-name"]
-            const taskDue = document.forms["modal"]["task-form-due"];
-            const taskPriority = document.forms["modal"]["task-form-priority"]
-        } else if(type == "project") {
-            
+            const taskName = document.getElementById("task-form-name");
+            const taskDue = document.getElementById("task-form-due");
+            const taskPriority = document.getElementById("task-form-priority")
+
+            if (taskName.value == "" || taskName.value == null) {
+                setCustomValidity("Please enter a task name ;p")
+            } else if (taskDue.value == '' || taskDue.value == null) {
+                setCustomValidity("Please enter a valid date O_o")
+            } else if (taskPriority.value == '' || taskPriority.value == null) {
+                setCustomValidity("Please enter a valid option")
+            } else {
+                let newTask = new Task(taskName.value, taskDue.value, taskPriority.value);
+                formModal.style.display = "none" 
+                return newTask;
+            }
         }
     }
 
@@ -193,7 +216,6 @@ export const ui =(function() {
         mainContent.append(activeProject, addTaskBtn)
     }
     
-
     return {
         render
     }
