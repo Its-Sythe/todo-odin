@@ -24,19 +24,19 @@ export const ui =(function() {
 
             if (tgt.id == "project-btn") {
                 let tgtProject = todo.getProject(tgt.textContent)
-                tgt.className = tgt.className == "inactive" ? "active" : "inactive" 
+                handleActive(tgt)
                 renderProjectTasks(tgtProject)            
                 renderAddTaskBtn(tgtProject);
             }
 
-            if (tgt.className = "add-project" && !(tgt.textContent == "Inbox" || tgt.textContent == "Today" || tgt.textContent == "Upcoming")) {
+            if (tgt.className == "add-project" && !(tgt.textContent == "Inbox" || tgt.textContent == "Today" || tgt.textContent == "Upcoming")) {
                 createForm("project");
             } 
         })
 
         document.querySelector(".main-content").addEventListener("click", (e) => {
             let tgt = e.target;
-            if (tgt.className = "add-task") {
+            if (tgt.className == "add-task") {
                 createForm("task");
             }
         })
@@ -47,10 +47,17 @@ export const ui =(function() {
                 let result = validateForm("project");
                 if (result != undefined || result != null) {
                     todo.addProject(result);
+                    renderProjects(todo.getProjects());
                 }
-            } 
+            }
+            if (tgt.className == "close-btn") {
+                document.querySelector(".form-modal").innerHTML = ""
+                document.querySelector(".form-modal").style.display = "none"
+            }
             if (tgt.id == "submit-task") {
                 let result = validateForm("task");
+                //let tgtProject = todo.getProject(//Find Active Project Function)
+                
             }
         })
     }
@@ -116,6 +123,7 @@ export const ui =(function() {
             const closeTaskModal = document.createElement("button");
             closeTaskModal.id = "close-task";
             closeTaskModal.textContent = "Cancel"
+            closeTaskModal.className = "close-btn"
 
             optionsContainer.append(submitTaskModal, closeTaskModal)
 
@@ -138,6 +146,7 @@ export const ui =(function() {
             const closeProjectModal = document.createElement("button");
             closeProjectModal.id = "close-project-modal";
             closeProjectModal.textContent = "Cancel";
+            closeProjectModal.className = "close-btn"
             
             optionsContainer.append(submitProject, closeProjectModal)
             
@@ -154,7 +163,6 @@ export const ui =(function() {
             } else {
                 let newProject = new Project(projectName.value)
                 formModal.style.display = "none"
-                console.log(newProject)
                 return newProject;
             }
         }    
@@ -164,11 +172,11 @@ export const ui =(function() {
             const taskPriority = document.getElementById("task-form-priority")
 
             if (taskName.value == "" || taskName.value == null) {
-                setCustomValidity("Please enter a task name ;p")
+                taskName.setCustomValidity("Please enter a task name ;p")
             } else if (taskDue.value == '' || taskDue.value == null) {
-                setCustomValidity("Please enter a valid date O_o")
+                taskDue.setCustomValidity("Please enter a valid date O_o")
             } else if (taskPriority.value == '' || taskPriority.value == null) {
-                setCustomValidity("Please enter a valid option")
+                taskPriority.setCustomValidity("Please enter a valid option")
             } else {
                 let newTask = new Task(taskName.value, taskDue.value, taskPriority.value);
                 formModal.style.display = "none" 
@@ -186,6 +194,7 @@ export const ui =(function() {
     }
 
     function renderProjects(projects) {
+        document.querySelector(".user-projects").innerHTML = ""
         const userProjects = document.querySelector(".user-projects");
         for (let i = 3; i < projects.length; i++) {
             userProjects.append(createProjectBtn(projects[i]))
@@ -216,6 +225,21 @@ export const ui =(function() {
         mainContent.append(activeProject, addTaskBtn)
     }
     
+    function handleActive(target) {
+        let allChildNodes = Array.from(target.parentNode.childNodes);
+        if (allChildNodes.length == 0) return;
+
+        if (allChildNodes.some(nodes => nodes.className == "active")) {
+            let activeProject = allChildNodes.find(nodes => nodes.className == "active");
+            activeProject.className = "inactive";
+            target.className = "active";
+            return target;
+        } else {
+            target.className = "active"
+            return target;
+        }
+    }
+
     return {
         render
     }
