@@ -25,6 +25,8 @@ export const ui =(function() {
             if (tgt.id == "project-btn") {
                 let tgtProject = todo.getProject(tgt.textContent)
                 handleActive(tgt)
+                let resutl = findActive();
+                console.log(resutl);
                 renderProjectTasks(tgtProject)            
                 renderAddTaskBtn(tgtProject);
             }
@@ -57,7 +59,7 @@ export const ui =(function() {
             if (tgt.id == "submit-task") {
                 let result = validateForm("task");
                 //let tgtProject = todo.getProject(//Find Active Project Function)
-                
+                findActive()
             }
         })
     }
@@ -241,14 +243,19 @@ export const ui =(function() {
     }
 
     function findActive() {
-        let childNodes = Array.from(document.querySelector(".side-nav").childNodes)
-        console.log(childNodes[4].className)
+        let container = document.querySelector(".side-nav").childNodes;
+        for (let i = 0; i < container.length; i++) {
+            if (container[i].tagName == "DIV") {
+                let childNodes = Array.from(container[i].childNodes);
+                if (childNodes.some(nodes => nodes.className == "active")) {
+                    let tgt = childNodes.find(nodes => nodes.className == "active");
+                    return tgt.textContent;
+                }
+            }
+        }
     }
-
     return {
         render,
         findActive
     }
 })();
-
-ui.findActive();
