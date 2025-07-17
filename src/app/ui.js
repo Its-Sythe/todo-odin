@@ -240,7 +240,15 @@ export const ui =(function() {
         }
     }
 
+    function findActive() {
+        let childNodes = Array.from(document.querySelector(".side-nav").childNodes)
+        console.log(childNodes[4].className)
+    }
+
     return {
-        render
+        render,
+        findActive
     }
 })();
+
+ui.findActive();
