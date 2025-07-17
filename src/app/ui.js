@@ -1,7 +1,7 @@
 import { Task, Project, Todo, storage } from './logic'
 
 export const ui =(function() {
-    let todo = new Todo();
+    let todo = storage.loadFromStorage() || new Todo()
    
     function render() {
         renderDefaultProjects(todo.getDefaults());
@@ -257,7 +257,6 @@ export const ui =(function() {
     }
 
     return {
-        render,
-        findActive
+        render
     }
 })();

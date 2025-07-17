@@ -63,7 +63,11 @@ export const storage = (function() {
     }
 
     function loadFromStorage() {
-        return JSON.parse(localStorage.getItem("todo"));
+        let content = JSON.parse(localStorage.getItem("todo"));
+        for (let i = 0; i < content.length; i++) {
+            Object.assign(Object.getPrototypeOf(content[i]), Object.getPrototypeOf(new Project()))
+        }
+        return content;
     }
 
     return {
