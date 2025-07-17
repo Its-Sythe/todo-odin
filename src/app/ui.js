@@ -1,4 +1,4 @@
-import { Task, Project, Todo } from './logic'
+import { Task, Project, Todo, storage } from './logic'
 
 export const ui =(function() {
     let todo = new Todo();
@@ -10,7 +10,7 @@ export const ui =(function() {
     }
 
     function createProjectBtn(project) {
-        const projectBtn = document.createElement("button");
+        const projectBtn = document.createElement("li");
         projectBtn.id = "project-btn";
         projectBtn.className = "inactive"
         projectBtn.textContent = project.name;        
@@ -59,6 +59,7 @@ export const ui =(function() {
                 
                 tgtProject.addTask(result);
                 renderProjectTasks(tgtProject);
+                storage.loadToStorage(todo.getProjects());
             }
         })
     }

@@ -56,3 +56,18 @@ export class Todo {
         return this.projects.find(projects => projects.name == projectName)
     }
 }
+
+export const storage = (function() {
+    function loadToStorage(item) {
+        localStorage.setItem("todo", JSON.stringify(item));
+    }
+
+    function loadFromStorage() {
+        return JSON.parse(localStorage.getItem("todo"));
+    }
+
+    return {
+        loadToStorage,
+        loadFromStorage
+    }
+})()
