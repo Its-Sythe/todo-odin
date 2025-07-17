@@ -25,10 +25,7 @@ export const ui =(function() {
             if (tgt.id == "project-btn") {
                 let tgtProject = todo.getProject(tgt.textContent)
                 handleActive(tgt)
-                let resutl = findActive();
-                console.log(resutl);
                 renderProjectTasks(tgtProject)            
-                renderAddTaskBtn(tgtProject);
             }
 
             if (tgt.className == "add-project" && !(tgt.textContent == "Inbox" || tgt.textContent == "Today" || tgt.textContent == "Upcoming")) {
@@ -58,8 +55,10 @@ export const ui =(function() {
             }
             if (tgt.id == "submit-task") {
                 let result = validateForm("task");
-                //let tgtProject = todo.getProject(//Find Active Project Function)
-                findActive()
+                let tgtProject = todo.getProject(findActive());
+                
+                tgtProject.addTask(result);
+                renderProjectTasks(tgtProject);
             }
         })
     }
@@ -206,6 +205,7 @@ export const ui =(function() {
     function renderProjectTasks(project) {
         const mainContent = document.querySelector(".main-content");
         mainContent.innerHTML = ""
+        renderAddTaskBtn(project);
         let tasks = project.tasks;
         if (tasks.length == 0) return;
 
@@ -254,6 +254,7 @@ export const ui =(function() {
             }
         }
     }
+
     return {
         render,
         findActive
