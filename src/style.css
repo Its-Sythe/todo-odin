@@ -1,10 +1,135 @@
 * {
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
+} 
+
+.title {
+    text-decoration: underline;
+    font-family: sans-serif;
+    letter-spacing: 2px;
 }
 
 body {
     display: grid;
-    grid-template: 1fr / max-content 1fr; 
+    grid-template: 1fr / max-content 1fr;
     height: 100vh;
+    background: linear-gradient(90deg, #0a001a, #1a0033);
+    gap: 10px;
 }
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;  
+    font-size: 1.5rem;
+    color: #00ffff;
+    padding: 0.5em;
+}
+
+.main-content {
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav > div {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+#project-btn {
+    background: transparent;
+    border: 1px solid #ff0080;
+    border-radius: 12px;
+    padding: 2px;
+    text-align: center;
+    padding: 2px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: rgba(255, 0, 128, 0.15);
+    box-shadow: 0 0 8px #ff0080;
+    color: #ffffff;
+}
+
+button {
+    background: transparent;
+    border: 1px solid #ff0080;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    color: #00ffff; 
+    padding: 2px;
+    margin-top: 10px;
+}
+
+#basic-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.add-task {
+    margin: 0;
+    padding: 5px;
+    font-size: 1.25em;
+    cursor: pointer;
+}
+
+#active-project-name {
+    color: white;
+    font-size: 1.8em;
+    text-decoration: underline;
+}
+
+.form-modal {
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+    background: transparent;
+}
+
+#project-form, #task-form {
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 12px;
+    background-color: rgb(120, 0, 255, 0.5);
+    padding: 12px;
+    border-radius: 12px;
+}
+
+#project-form > input {
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+}
+
+#options-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#options-container > button {
+    padding: 5px;
+}
+
+#task-form > input {
+    font-size: 1.25rem;
+    border-radius: 12px;
+    padding: 2px;
+}
+
+#task-form > select {
+    padding: 5px;
+}
+

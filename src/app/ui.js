@@ -1,9 +1,10 @@
-import { Task, Project, Todo, storage } from './logic'
+import { Task, Project, Todo, Storage } from './logic'
 
 export const ui =(function() {
-    let todo = storage.loadFromStorage() || new Todo()
+    let todo = Storage.loadFromStorage() || new Todo()
    
     function render() {
+        Storage.loadToStorage(new Todo());
         renderDefaultProjects(todo.getDefaults());
         renderProjects(todo.getProjects());
         handleClicks()
@@ -59,7 +60,7 @@ export const ui =(function() {
                 
                 tgtProject.addTask(result);
                 renderProjectTasks(tgtProject);
-                storage.loadToStorage(todo.getProjects());
+                Storage.loadToStorage(todo);
             }
         })
     }
@@ -93,6 +94,7 @@ export const ui =(function() {
             taskName.type = "text";
             taskName.id = "task-form-name";
             taskName.required = true;
+            taskName.placeholder = "Enter Task Name"
 
             const taskDue = document.createElement("input");
             taskDue.type = "date";
@@ -116,7 +118,7 @@ export const ui =(function() {
             taskPriority.options.add(lowPriority, 3);
 
             const optionsContainer = document.createElement("div");
-            optionsContainer.id = "task-options-container"
+            optionsContainer.id = "options-container"
 
             const submitTaskModal = document.createElement("button");
             submitTaskModal.id = "submit-task";
@@ -137,6 +139,7 @@ export const ui =(function() {
             const projectName = document.createElement("input");
             projectName.id = "project-form-name";
             projectName.required = true;
+            projectName.placeholder = "Enter Project Name"
 
             const optionsContainer = document.createElement("div");
             optionsContainer.id = "options-container"
@@ -218,14 +221,19 @@ export const ui =(function() {
     function renderAddTaskBtn(project) {
         const mainContent = document.querySelector(".main-content");
 
+        const containerMain = document.createElement("div")
+        containerMain.id = "basic-container"
+
         const activeProject = document.createElement("p");
+        activeProject.id = "active-project-name"
         activeProject.textContent = project.name
 
         const addTaskBtn = document.createElement("button");
         addTaskBtn.className = "add-task"
         addTaskBtn.textContent = "Add Task";
         
-        mainContent.append(activeProject, addTaskBtn)
+        containerMain.append(activeProject, addTaskBtn)
+        mainContent.append(containerMain)
     }
     
     function handleActive(target) {

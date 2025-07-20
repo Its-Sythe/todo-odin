@@ -57,21 +57,23 @@ export class Todo {
     }
 }
 
-export const storage = (function() {
-    function loadToStorage(item) {
+export class Storage {
+    static loadToStorage(item) {
         localStorage.setItem("todo", JSON.stringify(item));
     }
 
-    function loadFromStorage() {
+    static loadFromStorage() {
         let content = JSON.parse(localStorage.getItem("todo"));
-        for (let i = 0; i < content.length; i++) {
-            Object.assign(Object.getPrototypeOf(content[i]), Object.getPrototypeOf(new Project()))
+        if (content) {
+            Object.setPrototypeOf(content, Object.getPrototypeOf(new Todo()));
+            let projects = content.projects;
+            for (let i = 0; i < projects.length; i++) {
+                Object.setPrototypeOf(projects[i], Object.getPrototypeOf(new Project()));
+                for (let j = 0; j < projects[i].tasks.length; j++) {
+                    Object.setPrototypeOf(projects[i].tasks[j], Object.getPrototypeOf(new Task()));
+                }
+            }
+            return content;
         }
-        return content;
     }
-
-    return {
-        loadToStorage,
-        loadFromStorage
-    }
-})()
+}
