@@ -43,6 +43,7 @@ export const ui =(function() {
 
         document.querySelector(".form-modal").addEventListener("click", (e) => {
             let tgt = e.target;
+            e.preventDefault();
             if (tgt.id == "submit-project") {
                 let result = validateForm("project");
                 if (result != undefined || result != null) {

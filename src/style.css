@@ -40,7 +40,7 @@ body {
     font-size: 1.5rem;
 }
 
-#project-btn {
+button, li {
     background: transparent;
     border: 1px solid #ff0080;
     border-radius: 12px;
@@ -51,7 +51,7 @@ body {
     cursor: pointer;
 }
 
-button:hover {
+button:hover, li:hover {
     background: rgba(255, 0, 128, 0.15);
     box-shadow: 0 0 8px #ff0080;
     color: #ffffff;
@@ -133,3 +133,9 @@ button {
     padding: 5px;
 }
 
+#task-card {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px;
+}

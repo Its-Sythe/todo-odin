@@ -64,6 +64,7 @@ export class Storage {
 
     static loadFromStorage() {
         let content = JSON.parse(localStorage.getItem("todo"));
+        console.log(content);
         if (content) {
             Object.setPrototypeOf(content, Object.getPrototypeOf(new Todo()));
             let projects = content.projects;
