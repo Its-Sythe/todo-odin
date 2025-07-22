@@ -22,6 +22,14 @@ export class Project {
         this.tasks.push(task);
         return;
     }
+
+    deleteTask(taskName) {
+        if (!this.containsTask) return;
+
+        let tgtTask = this.tasks.find(tasks => tasks.name == taskName);
+        this.tasks.splice(this.tasks.indexOf(tgtTask), 1)
+        console.log(this.tasks)
+    }
 }
 
 export class Todo {
@@ -64,7 +72,6 @@ export class Storage {
 
     static loadFromStorage() {
         let content = JSON.parse(localStorage.getItem("todo"));
-        console.log(content);
         if (content) {
             Object.setPrototypeOf(content, Object.getPrototypeOf(new Todo()));
             let projects = content.projects;

@@ -1,10 +1,10 @@
+import { format } from "date-fns";
 import { Task, Project, Todo, Storage } from './logic'
 
 export const ui =(function() {
     let todo = Storage.loadFromStorage() || new Todo()
    
     function render() {
-        Storage.loadToStorage(new Todo());
         renderDefaultProjects(todo.getDefaults());
         renderProjects(todo.getProjects());
         handleClicks()
@@ -39,7 +39,14 @@ export const ui =(function() {
             if (tgt.className == "add-task") {
                 createForm("task");
             }
-        })
+
+            if(tgt.tagName == "path" || tgt.tagName == "svg" || tgt.id == "delete-task") {
+                let tgtTaskCard = tgt.closest("#task-card")
+                let tgtTaskName = tgtTaskCard.childNodes[0].childNodes[0].textContent;
+                deleteTask(tgtTaskName.slice(10, -1))
+                tgtTaskCard.remove();
+            }
+       })
 
         document.querySelector(".form-modal").addEventListener("click", (e) => {
             let tgt = e.target;
@@ -70,16 +77,29 @@ export const ui =(function() {
         const taskCard = document.createElement("div");
         taskCard.id = "task-card";
 
+        const cardDetails = document.createElement("div");
+        cardDetails.id = "card-details"
+
         const cardName = document.createElement("p");
-        cardName.textContent = task.name
+        cardName.textContent = "Task Name: " + task.name
         cardName.id = "card-title";
 
         const cardDue = document.createElement("p");
-        cardDue.textContent = task.due;
+        cardDue.textContent = "Task Due: " + formatDate(task.due);
         cardDue.id = "card-due";
-        
 
-        taskCard.append(cardName, cardDue);
+        const cardOptions = document.createElement("div");
+        cardOptions.id = "task-options";
+
+        const deleteTask = document.createElement("span");
+        deleteTask.id = "delete-task";
+        deleteTask.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>trash-can-outline</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>'
+        
+        cardOptions.append(deleteTask)
+        cardDetails.append(cardName, cardDue)
+
+        taskCard.append(cardDetails, cardOptions);
+
         return taskCard;
     }
 
@@ -263,6 +283,17 @@ export const ui =(function() {
                 }
             }
         }
+    }
+
+    function deleteTask(task) {
+        let content = Storage.loadFromStorage();
+        let activeProject = todo.getProject(document.querySelector(".active").textContent); 
+        activeProject.deleteTask(task)
+        Storage.loadToStorage(todo)
+    }
+
+    function formatDate(date) {
+        return format(date, "do MMM yyyy");
     }
 
     return {

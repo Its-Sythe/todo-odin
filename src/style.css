@@ -30,6 +30,7 @@ body {
     padding: 0.5em;
     display: flex;
     flex-direction: column;
+    gap: 12px;
 }
 
 .side-nav > div {
@@ -135,7 +136,27 @@ button {
 
 #task-card {
     display: flex;
-    justify-content: space-between;
-    background-color: white;
     padding: 10px;
+    justify-content: space-between;
+    background: linear-gradient(to right, rgba(255, 0, 128, 0.15), rgba(28, 0, 51, 0.15), #00ffff);
+    border: 1px solid #ff0080;
+    color: #00ffff;
+    border-radius: 12px;
 }
+
+#card-details > p {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#delete-task {
+    border-bottom: 1px solid red;
+    cursor: pointer;
+}
+
+#delete-task > svg {
+    height: 75%;
+    color: #00ffff;
+}
+
