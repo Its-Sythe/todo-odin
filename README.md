@@ -3,7 +3,7 @@
 
 #### You can access the live page here [時Toki](https://its-sythe.github.io/todo-odin/).
 
-![alt text] (./assets/ex-ss.png)
+![alt text](https://github.com/Its-Sythe/todo-odin/blob/main/assets/ex-ss.png)
 
 
 #### Basic Todo App written in plain HTML/CSS and JavaScript,
