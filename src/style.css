@@ -28,7 +28,7 @@ body {
     padding: 0.5em;
     display: flex;
     flex-direction: column;
-    gap: .5em;
+    gap: 1em;
 }
 
 .side-nav > div {
@@ -40,11 +40,8 @@ body {
 }
 
 button, li {
-    background: transparent;
     border-radius: 12px;
-    padding: 2px;
-    text-align: center;
-    padding: 2px;
+    padding: .2em;
     list-style-type: none;
     cursor: pointer;
 }
@@ -53,6 +50,7 @@ button:hover, li:hover {
     background: rgba(39, 39, 39, 0.754);
     box-shadow: 0 0 8px beige;
     color: #ffffff;
+    transform: scale(1.05);
 }
 
 button {
@@ -79,12 +77,14 @@ button {
 }
 
 .form-modal {
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-left: -150px;
     margin-top: -150px;
+    box-shadow: 10px 10px 10px 5px rgba(0, 0, 0, 0.8);
 }
 
 #project-form, #task-form {
@@ -93,14 +93,14 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    gap: 12px;
-    background-color: rgb(120, 0, 255, 0.5);
-    padding: 12px;
+    gap: 1em;
+    background-color: rgba(200, 200, 200, 0.5);
+    padding: 1.2em;
     border-radius: 12px;
 }
 
 #project-form > input {
-    padding: 15px;
+    padding: .2em;
     border-radius: 12px;
     font-size: 1.25rem;
 }
@@ -117,21 +117,23 @@ button {
 #task-form > input {
     font-size: 1.25rem;
     border-radius: 12px;
-    padding: 2px;
+    padding: .2em;
 }
 
 #task-form > select {
-    padding: 5px;
+    padding: .5em;
+    border-radius: 12px;
 }
 
 #task-card {
     display: flex;
-    padding: 10px;
+    padding: .5em;
     justify-content: space-between;
-    background: linear-gradient(to right, rgba(255, 0, 128, 0.15), rgba(28, 0, 51, 0.15), #00ffff);
-    border: 1px solid #ff0080;
-    color: #00ffff;
+    background-color: rgba(50, 50, 50, 0.2);
+    border: none;
+    color: beige;
     border-radius: 12px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.9);
 }
 
 #card-details > p {
@@ -141,12 +143,10 @@ button {
 }
 
 #delete-task {
-    border-bottom: 1px solid red;
     cursor: pointer;
 }
 
 #delete-task > svg {
     height: 75%;
-    color: #00ffff;
 }
 
