@@ -6,4 +6,4 @@ To do project for the odin project, js path project task.
 
 > There is a prominent use of classes in this project as it was another topic introduced in the previous lessons
 
->> - Found a bug with fetching from local storage after trying to access a project from its project btn as its not found.
+>> - Surprisingly couldnt find a bug, but surely there exists one, but for now I will be redoing the styling for the enitre thing for user friendliness.

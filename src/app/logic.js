@@ -34,7 +34,7 @@ export class Project {
 
 export class Todo {
     constructor() {
-        this.projects = [];
+        this.projects = [] || Storage.loadFromStorage();
         this.projects.push(new Project("Inbox"));
         this.projects.push(new Project("Today"));
         this.projects.push(new Project("Upcoming"));

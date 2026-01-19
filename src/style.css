@@ -3,26 +3,24 @@
     margin: 0px;
 } 
 
-.title {
-    text-decoration: underline;
-    font-family: sans-serif;
-    letter-spacing: 2px;
-}
-
 body {
     display: grid;
-    grid-template: 1fr / max-content 1fr;
-    height: 100vh;
-    background: linear-gradient(90deg, #0a001a, #1a0033);
-    gap: 10px;
+    grid-template: 1fr / .15fr .85fr;
+    background-color: rgba(50, 50, 50, 0.5);
+}
+
+.title {
+    text-decoration: underline;
+    font-family: monospace, sans-serif;
+    font-size: 1.2em;
 }
 
 .side-nav {
     display: flex;
     flex-direction: column;
-    gap: 4px;  
+    gap: .2em;
     font-size: 1.5rem;
-    color: #00ffff;
+    color: beige;
     padding: 0.5em;
 }
 
@@ -30,20 +28,19 @@ body {
     padding: 0.5em;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: .5em;
 }
 
 .side-nav > div {
-    font-family: 'Inter', sans-serif;
+    font-family: monospace, sans-serif;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: .4em;
     font-size: 1.5rem;
 }
 
 button, li {
     background: transparent;
-    border: 1px solid #ff0080;
     border-radius: 12px;
     padding: 2px;
     text-align: center;
@@ -53,38 +50,32 @@ button, li {
 }
 
 button:hover, li:hover {
-    background: rgba(255, 0, 128, 0.15);
-    box-shadow: 0 0 8px #ff0080;
+    background: rgba(39, 39, 39, 0.754);
+    box-shadow: 0 0 8px beige;
     color: #ffffff;
 }
 
 button {
-    background: transparent;
-    border: 1px solid #ff0080;
-    font-size: 1.2rem;
+    background: rgba(39, 39, 39, 0.8);
+    border: none;
+    font-size: 1.25rem;
     border-radius: 12px;
-    color: #00ffff; 
-    padding: 2px;
-    margin-top: 10px;
+    color: whitesmoke;
+    padding: .35em;
 }
 
 #basic-container {
     display: flex;
     justify-content: space-between;
-}
-
-
-.add-task {
-    margin: 0;
-    padding: 5px;
-    font-size: 1.25em;
-    cursor: pointer;
+    align-items: center;
+    padding: .5em;
 }
 
 #active-project-name {
-    color: white;
+    color: beige;
     font-size: 1.8em;
     text-decoration: underline;
+    font-family: monospace, sans-serif;
 }
 
 .form-modal {
@@ -94,7 +85,6 @@ button {
     left: 50%;
     margin-left: -150px;
     margin-top: -150px;
-    background: transparent;
 }
 
 #project-form, #task-form {
