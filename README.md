@@ -1,13 +1,9 @@
-# todo-odin
-### To Do Project For The Odin Project.
+# Todo Project
 
-#### You can access the live page here [時Toki](https://its-sythe.github.io/todo-odin/).
+To do project for the odin project, js path project task.
 
-![alt text](https://github.com/Its-Sythe/todo-odin/blob/main/assets/ex-ss.png)
+> This project introduces the use of localstorage to store the data stored/added by the user into the browser's local storage for later fetching
 
+> There is a prominent use of classes in this project as it was another topic introduced in the previous lessons
 
-#### Basic Todo App written in plain HTML/CSS and JavaScript,
-#### As per a project in The Odin Project Curriculum.
-
-The app provides basic features like adding tasks, deleting them and local storage.
-It is nothing grandiose but it is a working app that I can look forward to improving once I am further into The Odin Project
+>> - Found a bug with fetching from local storage after trying to access a project from its project btn as its not found.
